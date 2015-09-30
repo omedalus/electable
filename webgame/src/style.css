@@ -54,6 +54,12 @@ ul {
     list-style-position: outside;
 }
 
+.gridicon {
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+  background-position: center center;
+}
+
 .issuelist {
     margin-top: 20px;
 }
@@ -137,6 +143,10 @@ ul {
   width: 100%;
 }
 
+tr.voterrow {
+  cursor: pointer;
+}
+
 tr.voterrow  td {
   border-bottom: 1px solid #448;
   height: 32px;
@@ -146,15 +156,26 @@ tr.voterrow:first-child  td {
   border-top: 1px solid #448;
 }
 
-tr.voterrow.voterisnotvotingforyou {
-  background: #888;
+tr.voterrow:hover {
+  background: #acf;
 }
+
+tr.voterrow.rowexpanded {
+  height: 64px;
+}
+
+
 
 .voterpic {
   background-image: url('img/user_blue_32.png');
   height: 32px;
   width: 32px;
 }
+
+tr.voterrow.voterisnotvotingforyou  .voterpic {
+  background-image: url('img/user_red.png');
+}
+
 
 .voterissue {
   text-align: center;

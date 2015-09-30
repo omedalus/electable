@@ -416,5 +416,24 @@ voter3sat.controller('GameCtrl', ['$scope', 'GameService', function($scope, Game
     return issuekey in voter.opinions;
   };
   
+  // Current voter management.
+  var currentVoter = null; 
+
+  $scope.setCurrentVoter = function(voter) {
+    currentVoter = (currentVoter === voter) ? null : voter;
+  };
+  
+  $scope.isCurrentVoter = function(voter) {
+    return (currentVoter === voter);
+  };
+
+  $scope.getVoterRowClasses = function(voter) {
+    var isVoterVotingForYou = GameService.isVoterVotingForYou(voter);
+    return {
+      voterisvotingforyou: isVoterVotingForYou,
+      voterisnotvotingforyou: !isVoterVotingForYou,
+      rowexpanded: (currentVoter === voter)
+    };
+  };
 }]);
 

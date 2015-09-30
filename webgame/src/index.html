@@ -100,8 +100,9 @@
           <div class="voterlist">
             <table class="votertable">
               <tr class="voterrow" data-ng-repeat="voter in GameService.voters"
-                  data-ng-class="GameService.isVoterVotingForYou(voter) ? 'voterisvotingforyou' : 'voterisnotvotingforyou'">
-                <td class="voterpic" data-ng-style="voterImageStyle(voter)"></td>
+                  data-ng-class="getVoterRowClasses(voter)"
+                  data-ng-click="setCurrentVoter(voter)">
+                <td class="voterpic gridicon" data-ng-style="voterImageStyle(voter)"></td>
                 
                 <td class="voterissue" data-ng-repeat="issue in GameService.sortedIssues"
                     data-ng-class="voter.opinions[issue.key] == GameService.platform[issue.key] ? 'voteragreesonissue' : 'voterdisagreesonissue'">
