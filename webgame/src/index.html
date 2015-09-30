@@ -99,17 +99,30 @@
             
           <div class="voterlist">
             <table class="votertable">
-              <tr class="voterrow" data-ng-repeat="voter in GameService.voters"
-                  data-ng-class="getVoterRowClasses(voter)"
-                  data-ng-click="setCurrentVoter(voter)">
-                <td class="voterpic gridicon" data-ng-style="voterImageStyle(voter)"></td>
-                
-                <td class="voterissue" data-ng-repeat="issue in GameService.sortedIssues"
-                    data-ng-class="voter.opinions[issue.key] == GameService.platform[issue.key] ? 'voteragreesonissue' : 'voterdisagreesonissue'">
-                  <div class="voterissuebox" data-ng-show="voterCaresAboutIssue(voter, issue.key)">
-                  </div>
-                </td>
-              </tr>
+              <thead>
+                <tr>
+                  <th></th> <!-- Make room for the voter icon. -->
+                  <th class="platformissue" data-ng-repeat="issue in GameService.sortedIssues"
+                      data-ng-class="GameService.platform[issue.key] ? 'platformissuepro' : 'platformissuecon'">
+                    <div class="platformissuebox">
+                      <img class="gridicon" src="{{issue.img}}" />
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="voterrow" data-ng-repeat="voter in GameService.voters"
+                    data-ng-class="getVoterRowClasses(voter)"
+                    data-ng-click="setCurrentVoter(voter)">
+                  <td class="voterpic gridicon" data-ng-style="voterImageStyle(voter)"></td>
+                  
+                  <td class="voterissue" data-ng-repeat="issue in GameService.sortedIssues"
+                      data-ng-class="voter.opinions[issue.key] == GameService.platform[issue.key] ? 'voteragreesonissue' : 'voterdisagreesonissue'">
+                    <div class="voterissuebox" data-ng-show="voterCaresAboutIssue(voter, issue.key)">
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
             </table>
           
             <!--

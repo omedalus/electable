@@ -329,14 +329,14 @@ voter3sat.factory('IssueFactory', function() {
           issuetext: 'Vaccination',
           textcon: 'Letting Parents Decide What\'s Best For Their Child', 
           textpro: 'Mandatory Vaccination', 
-          img: 'img/issues/diploma.png'
+          img: 'img/issues/vaccination.png'
       },
       'womansalary': {
           key: 'womansalary', 
           issuetext: 'The Gender Pay Gap',
           textcon: 'Letting Employers/Employees Negotiate Pay',
           textpro: 'Enforcing Equal Pay For Women', 
-          img: ''
+          img: 'gender-equality.png'
       },    
   };    
 

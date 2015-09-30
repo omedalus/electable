@@ -58,6 +58,8 @@ ul {
   background-repeat: no-repeat;
   background-size: 32px 32px;
   background-position: center center;
+  height: 32px;
+  width: 32px;
 }
 
 .issuelist {
