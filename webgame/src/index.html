@@ -98,10 +98,23 @@
           </div>
             
           <div class="voterlist">
+            <table class="votertable">
+              <tr class="voterrow" data-ng-repeat="voter in GameService.voters"
+                  data-ng-class="GameService.isVoterVotingForYou(voter) ? 'voterisvotingforyou' : 'voterisnotvotingforyou'">
+                <td class="voterpic" data-ng-style="voterImageStyle(voter)"></td>
+                
+                <td class="voterissue" data-ng-repeat="issue in GameService.sortedIssues"
+                    data-ng-class="voter.opinions[issue.key] == GameService.platform[issue.key] ? 'voteragreesonissue' : 'voterdisagreesonissue'">
+                  <div class="voterissuebox" data-ng-show="voterCaresAboutIssue(voter, issue.key)">
+                  </div>
+                </td>
+              </tr>
+            </table>
+          
+            <!--
             <div class="voter" data-ng-repeat="voter in GameService.voters"
-                 data-ng-class="GameService.isVoterVotingForYou(voter) ? 'voterisvotingforyou' : ''">
+                data-ng-class="GameService.isVoterVotingForYou(voter) ? 'voterisvotingforyou' : ''">
               <div class="voterimage" data-ng-style="voterImageStyle(voter)"></div>
-              {{voter.sortkey}}
               <div class="voterbody">
                 <div class="voteropinions">
                   <div class="voteropinion" data-ng-repeat="issuekey in voter.sortedIssueKeys"
@@ -113,6 +126,7 @@
                 </div>
               </div>
             </div>
+            -->
           </div>
         </div>
       </div>

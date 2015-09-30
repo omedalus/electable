@@ -132,55 +132,49 @@ ul {
 
 
 
-.voter {
-    background: #aaa;
-    border: 1px solid #008;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    margin-right: 20px;
-    padding: 10px;
-    vertical-align: top;
+.votertable {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-.voter.voterisvotingforyou {
-    background: white;
+tr.voterrow  td {
+  border-bottom: 1px solid #448;
+  height: 32px;
 }
 
-.voterlist {
-    height: 460px;
-    margin-top: 20px;
-    overflow-y: scroll;
+tr.voterrow:first-child  td {
+  border-top: 1px solid #448;
 }
 
-.voterimage {
-    background-image: url('http://remarqbl.fr/wp-content/uploads/2014/02/Persona.jpg');
-    background-size: 320px 256px;
-    display: inline-block;
-    height: 64px;
-    width: 64px;
+tr.voterrow.voterisnotvotingforyou {
+  background: #888;
 }
 
-.voterbody {
-    display: inline-block;
-    vertical-align: top;
+.voterpic {
+  background-image: url('img/user_blue_32.png');
+  height: 32px;
+  width: 32px;
 }
 
-.voteropinion {
-    font-weight: bold;
-    margin-left: 20px;
+.voterissue {
+  text-align: center;
 }
 
-.votercheck {
-    background-image: url('http://www.spiderswatch.com/wp-content/themes/spiderswatch/img/tick.gif');
-    display: inline-block;
-    height: 16px;
-    opacity: 0;
-    width: 16px;
+.voterissuebox {
+  border: 1px solid #448;
+  border-radius: 10px;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
 }
 
-.votercheck.votercheckshow {
-    opacity: 1;
+.voterissue.voteragreesonissue .voterissuebox {
+  background-color: #fff;
 }
+.voterissue.voterdisagreesonissue .voterissuebox {
+  background-color: #444;
+}
+
 
 .winnerburst {
     background-image: url('http://res.freestockphotos.biz/pictures/7/7240-illustration-of-a-burst-with-win-text-pv.png');
