@@ -1,0 +1,197 @@
+html {
+    cursor: default;
+    margin: 0;
+    padding: 0;
+    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    background-color: #137EC0;
+}
+
+.config input {
+    margin-right: 20px;
+}
+
+.game {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 20px auto;
+    width: 800px;
+}
+
+.platform {
+    background-color: #59a4d3;
+    border: 1px solid #008;
+    border-radius: 10px;
+    color: white;
+    float: left;
+    margin-right: 20px;
+    padding: 10px;
+    white-space: normal;
+    width: 260px;
+}
+
+.platformlead {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.instructiontext {
+    font-size: 12px;
+    white-space: normal;
+}
+
+ul {
+    margin: 0;
+    padding-left: 3ex;
+    list-style-position: outside;
+}
+
+.issuelist {
+    margin-top: 20px;
+}
+
+.issueitem {
+    cursor: pointer;
+    padding: 5px 15px;
+}
+
+.issuepro {
+    color: #8F8;
+}
+
+.issuecon {
+    color: #c66;
+}
+
+.issuename {
+    font-weight: bold;
+}
+
+.issueblurb {
+    opacity: 0;
+    font-size: 12px;
+    height: 2em;
+    margin-left: 10px;
+    white-space: normal;
+}
+
+.issueitem:hover .issueblurb {
+    opacity: 1;
+}
+
+.flipflop {
+    background-image: url('http://images.lacrosseunlimited.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/R/a/Rainbow_Sandals_Premier_Leathers_tan_sierra_301ALTS0_srbr_42_2.png');
+    background-size: 64px 64px;
+    display: inline-block;
+    height: 64px;
+    white-space: normal;
+    width: 64px;
+}
+
+.flipcrossout {
+    background-image: url('http://www.aspals.com/redcross.gif');
+    background-size: 64px 64px;
+    display: inline-block;
+    height: 64px;
+    width: 64px;
+}
+
+.flipflop.unflipped .flipcrossout {
+    opacity: 0;
+}
+
+.voters {
+    float: right;
+    width: 480px;
+}
+
+.voterlead {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.voterprogress {
+    font-weight: bold;
+}
+
+.votessecured {
+    color: white;
+}
+
+.votestotal {
+    color: #aaa;
+}
+
+
+
+.voter {
+    background: #aaa;
+    border: 1px solid #008;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.voter.voterisvotingforyou {
+    background: white;
+}
+
+.voterlist {
+    height: 460px;
+    margin-top: 20px;
+    overflow-y: scroll;
+}
+
+.voterimage {
+    background-image: url('http://remarqbl.fr/wp-content/uploads/2014/02/Persona.jpg');
+    background-size: 320px 256px;
+    display: inline-block;
+    height: 64px;
+    width: 64px;
+}
+
+.voterbody {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.voteropinion {
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.votercheck {
+    background-image: url('http://www.spiderswatch.com/wp-content/themes/spiderswatch/img/tick.gif');
+    display: inline-block;
+    height: 16px;
+    opacity: 0;
+    width: 16px;
+}
+
+.votercheck.votercheckshow {
+    opacity: 1;
+}
+
+.winnerburst {
+    background-image: url('http://res.freestockphotos.biz/pictures/7/7240-illustration-of-a-burst-with-win-text-pv.png');
+    background-size: 300px;
+    height: 260px;
+    width: 300px;
+}
+
+.loserburst {
+    background-image: url('http://vignette1.wikia.nocookie.net/uncyclopedia/images/d/de/Lose.gif/revision/latest?cb=20070427230953');
+    background-size: 260px 260px;
+    height: 260px;
+    width: 260px;
+}

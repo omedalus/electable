@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Electable!</title>
+    
+    <!-- Third-party dependencies. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    
+    <!-- AngularJS app. -->
+    <script src="voter3sat.js"></script>
+    
+    <!-- CSS stylesheets. -->
+    <link href="style.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app" data-ng-app="Voter3SAT">
+
+      <div class="config" data-ng-controller="ConfigCtrl">
+        <table>
+          <tr>
+            <td>
+              # issues
+            </td>
+            <td>
+              <input type="number" name="numIssues" data-ng-model="numIssues" min="3" max="14"></input>
+            </td>
+          </tr>
+        </table>
+        <div>
+          <button data-ng-click="doGenerate()">Generate</button>
+        </div>
+      </div>
+      
+      <div class="game" data-ng-controller="GameCtrl">
+        <div class="platform">
+          <div class="platformlead">
+            Your Platform 
+          </div>
+          <div class="platformexplain instructiontext">
+            <ul>
+              <li>Tap on an issue to flipflop your stance on it.</li>
+              <li>A winning combination of stances will match at least <em>one</em> personal top issue of <em>every</em> voter</li>
+              <li>You have a limited number of flipflops you can make.</li>
+            </ul>
+          </div>
+          <div class="issuelist">
+            <div class="issueitem" data-ng-repeat="issue in GameService.sortedIssues"
+                data-ng-class="GameService.platform[issue.key] ? 'issuepro' : 'issuecon'"
+                data-ng-click="flip(issue)">
+              <div>
+                <span class="issueprocon" data-ng-bind="GameService.platform[issue.key] ? 'For' : 'Against'"></span>
+                <span class="issuename" data-ng-bind="issue.issuetext"></span>
+              </div>
+              <div class="issueblurb">
+                &ldquo;I support
+                <span class="issueprocon" data-ng-bind="issue.stance ? issue.textpro : issue.textcon"></span>&rdquo;.
+              </div>
+            </div>
+          </div>
+
+          <div class="flipflops">
+            <div class="flipflop" data-ng-repeat="flip in getFlips() track by $index" data-ng-class="flip ? 'flipped' : 'unflipped'">
+                <div class="flipcrossout"></div>
+            </div>
+          </div>
+          
+          <div class="winner" data-ng-show="!!GameService.voters.length && GameService.isPlatformWinning()">
+            <div class="winnerburst">
+            </div>
+          </div>
+          
+          <div class="loser" data-ng-show="!!GameService.voters.length && GameService.didPlayerLose()">
+            <div class="loserburst">
+            </div>
+          </div>
+        </div>
+        
+        <div class="voters">
+          <div class="voterlead">
+              The Voters 
+          </div>
+          <div class="voterprogress">
+            <span class="voterprogressstats">
+              <span class="votessecured" data-ng-bind="countVotersSecured()"></span>
+              /
+              <span class="votestotal" data-ng-bind="GameService.voters.length"></span>
+            </span>
+            votes secured
+          </div>
+            
+          <div class="voterexplain instructiontext">
+            <ul>
+              <li>You must convince <em>all</em> of these voters to vote for you.</li>
+              <li>A voter will vote for you if they agree with you on at least <em>one</em>
+                  of their personal top issues.</li>
+            </ul>
+          </div>
+            
+          <div class="voterlist">
+            <div class="voter" data-ng-repeat="voter in GameService.voters"
+                 data-ng-class="GameService.isVoterVotingForYou(voter) ? 'voterisvotingforyou' : ''">
+              <div class="voterimage" data-ng-style="voterImageStyle(voter)"></div>
+              {{voter.sortkey}}
+              <div class="voterbody">
+                <div class="voteropinions">
+                  <div class="voteropinion" data-ng-repeat="issuekey in voter.sortedIssueKeys"
+                      data-ng-class="voter.opinions[issuekey] ? 'issuepro' : 'issuecon'">
+                    <span class="votercheck" 
+                        data-ng-class="voter.opinions[issuekey] == GameService.platform[issuekey] ? 'votercheckshow' : ''"></span>
+                    <span data-ng-bind="GameService.issues[issuekey].issuetext"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+    </div>
+  </body>
+</html>
+
