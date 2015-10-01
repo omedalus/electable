@@ -270,8 +270,20 @@ tr.voterrow:first-child  td {
 tr.voterrow:hover {
   background: #acf;
 }
+tr.voterrow:hover td{
+  background-color: transparent;
+}
+
 
 tr.voterrow.rowexpanded {
+  background: #acf;
+  height: 164px;
+}
+tr.voterrow.rowexpanded td{
+  background-color: transparent;
+}
+tr.voterrow.rowexpanded:hover {
+  background: #def;
   height: 164px;
 }
 
@@ -313,6 +325,7 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
   border-radius: 10px;
   display: none;
   margin-left: 50px;
+  margin-right: 10px;
   margin-top: 32px;
   padding: 10px;
   position: absolute;

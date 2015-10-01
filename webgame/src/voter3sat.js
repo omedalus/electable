@@ -116,6 +116,13 @@ voter3sat.service('GameService', ['$rootScope', 'IssueFactory', function($rootSc
       var sortkey = issuesortkey + '-' + opinionsortkey;
       return sortkey;
     });
+    
+    var ivoter = 0;
+    _.each(voters, function(voter) {
+      voter.index = ivoter;
+      ivoter++;
+    });
+    
     return voters;
   };
 
@@ -392,6 +399,7 @@ voter3sat.controller('GameCtrl', ['$document', '$scope', 'GameService',
       break;
 
       case 38: // up
+      $scope.stepVoter(-1);
       break;
 
       case 39: // right
@@ -399,10 +407,16 @@ voter3sat.controller('GameCtrl', ['$document', '$scope', 'GameService',
       break;
 
       case 40: // down
+      $scope.stepVoter(1);
       break;
 
+      case 13: // enter
       case 32: // space
       $scope.flip($scope.getCurrentIssue());
+      break;
+      
+      case 27: // escape
+      $scope.setCurrentVoter(null);
       break;
 
       default: return; // exit this handler for other keys
@@ -491,6 +505,30 @@ voter3sat.controller('GameCtrl', ['$document', '$scope', 'GameService',
       voterisnotvotingforyou: !isVoterVotingForYou,
       rowexpanded: (currentVoter === voter)
     };
+  };
+  
+  $scope.stepVoter = function(stepval) {
+    var index;
+    var numVoters = GameService.voters.length;
+
+    if (!currentVoter) {
+      if (stepval < 0) {
+        index = numVoters + stepval;
+      }
+      else {
+        index = stepval - 1;
+      }
+    }
+    else if ((currentVoter.index === 0 && stepval < 0) ||
+        (currentVoter.index === numVoters - 1 && stepval > 0)) {
+      index = -1;
+    }
+    else {
+      index = currentVoter.index + stepval;
+    }
+    
+    var voter = index >= 0 ? GameService.voters[index] : null;
+    $scope.setCurrentVoter(voter);
   };
   
   // Current issue management.
