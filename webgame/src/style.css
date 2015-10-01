@@ -95,6 +95,23 @@ ul {
     opacity: 1;
 }
 
+.platformissue {
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+.currentissue {
+  background: #ff8;
+}
+
+.issuelabelpro {
+  color: #0a0;
+}
+
+.issuelabelcon {
+  color: #822;
+}
+
 .flipflop {
     background-image: url('http://images.lacrosseunlimited.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/R/a/Rainbow_Sandals_Premier_Leathers_tan_sierra_301ALTS0_srbr_42_2.png');
     background-size: 64px 64px;

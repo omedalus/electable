@@ -33,6 +33,7 @@
       </div>
       
       <div class="game" data-ng-controller="GameCtrl">
+      <!--
         <div class="platform">
           <div class="platformlead">
             Your Platform 
@@ -75,6 +76,7 @@
             </div>
           </div>
         </div>
+        -->
         
         <div class="voters">
           <div class="voterlead">
@@ -103,10 +105,17 @@
                 <tr>
                   <th></th> <!-- Make room for the voter icon. -->
                   <th class="platformissue" data-ng-repeat="issue in GameService.sortedIssues"
-                      data-ng-class="GameService.platform[issue.key] ? 'platformissuepro' : 'platformissuecon'">
-                    <div class="platformissuebox">
+                      data-ng-class="getIssueRowClasses(issue.key)">
+                    <div class="issuelabelpro">
+                      FOR
+                    <div>
+                    <div class="platformissuebox" 
+                        data-ng-click="setCurrentIssue(issue.key)">
                       <img class="gridicon" src="{{issue.img}}" />
                     </div>
+                    <div class="issuelabelcon">
+                      AGAINST
+                    <div>
                   </th>
                 </tr>
               </thead>
