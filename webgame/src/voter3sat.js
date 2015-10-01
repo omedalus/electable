@@ -267,8 +267,8 @@ voter3sat.factory('IssueFactory', function() {
       'financial': {
           key: 'financial', 
           issuetext: 'Financial Regulation',
-          textcon: 'Arresting Predatory Wall Street Fat Cats', 
-          textpro: 'A Laissez-Faire Economy', 
+          textcon: 'A Laissez-Faire Economy', 
+          textpro: 'Arresting Predatory Wall Street Fat Cats', 
           img: 'img/issues/bank_building.png'
       },
       'gaymarriage': {
@@ -329,7 +329,7 @@ voter3sat.factory('IssueFactory', function() {
       },
       'womansalary': {
           key: 'womansalary', 
-          issuetext: 'The Gender Pay Gap',
+          issuetext: 'Addressing The Gender Pay Gap',
           textcon: 'Letting Employers/Employees Negotiate Pay',
           textpro: 'Enforcing Equal Pay For Women', 
           img: 'img/issues/gender-equality.png'
@@ -376,11 +376,40 @@ voter3sat.controller('ConfigCtrl', ['$scope', 'GameService', function($scope, Ga
   $scope.doGenerate = function() {
     GameService.start($scope.numIssues);
   };
+  
+  $scope.doGenerate();
 }]);
 
 
-voter3sat.controller('GameCtrl', ['$scope', 'GameService', function($scope, GameService) {
+voter3sat.controller('GameCtrl', ['$document', '$scope', 'GameService', 
+    function($document, $scope, GameService) {
   $scope.GameService = GameService;
+
+  $($document).keydown(function(e) {
+    switch(e.which) {
+      case 37: // left
+      $scope.stepIssue(-1);
+      break;
+
+      case 38: // up
+      break;
+
+      case 39: // right
+      $scope.stepIssue(1);
+      break;
+
+      case 40: // down
+      break;
+
+      case 32: // space
+      $scope.flip($scope.getCurrentIssue());
+      break;
+
+      default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)    
+    $scope.$apply();
+  });
   
   $scope.$watch('GameService.sortedIssues', function(sortedIssues) {
     if (sortedIssues && _.size(sortedIssues) > 0) {

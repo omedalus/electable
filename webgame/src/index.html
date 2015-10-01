@@ -6,6 +6,7 @@
     <!-- Third-party dependencies. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     
     <!-- AngularJS app. -->
     <script src="voter3sat.js"></script>
@@ -32,10 +33,10 @@
         </div>
       </div>
       
-      <div class="game" data-ng-controller="GameCtrl">
+      <div class="game" data-ng-controller="GameCtrl" data-ng-keyup="keyup($event)">
         <div class="platform">
-                  <div class="voterlead">
-              The Voters 
+          <div class="voterlead">
+            The Voters 
           </div>
           <div class="voterprogress">
             <span class="voterprogressstats">
@@ -52,8 +53,8 @@
               <li>Each voter has a strong opinion about <em>three</em> issues.</li>
               <li>A voter will vote for you if they agree with you on at least <em>one</em>
                   of their three personal issues.</li>
-              <li>Flip your stances on issues to switch which voters agree with you.</li>
-              <li>A winning combination of stances will match at least <em>one</em> personal top issue of <em>every</em> voter</li>
+              <li>Flip your stances on an issue to switch which voters agree/disagree with you on it.</li>
+              <li>A winning combination of stances will match at least <em>one</em> personal issue of <em>every</em> voter</li>
               <li>You can only make {{getFlips().length}} flipflops.</li>
             </ul>
           </div>
