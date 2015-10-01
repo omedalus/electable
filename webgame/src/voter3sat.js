@@ -207,10 +207,6 @@ voter3sat.service('GameService', ['$rootScope', 'IssueFactory', function($rootSc
   };
   
   this.flipStance = function(issue) {
-      if (!GameService.isGameOn()) {
-          return;
-      }
-      
       GameService.platform[issue.key] = !GameService.platform[issue.key];
       GameService.flips.used++;
   };
@@ -292,8 +288,8 @@ voter3sat.factory('IssueFactory', function() {
       'healthcare': {
           key: 'healthcare', 
           issuetext: 'Nationalized Healthcare',
-          textcon: 'A Single-Payer Government-Funded Health Provider', 
-          textpro: 'A Free-Market Medical System', 
+          textcon: 'A Free-Market Medical System', 
+          textpro: 'A Single-Payer Government-Funded Health Provider', 
           img: 'img/issues/healthcare.png'
       },
       'israel': {
@@ -446,7 +442,7 @@ voter3sat.controller('GameCtrl', ['$scope', 'GameService', function($scope, Game
   var currentIssueKey = null; 
 
   $scope.setCurrentIssueKey = function(issuekey) {
-    currentIssueKey = (currentIssueKey === issuekey) ? null : issuekey;
+    currentIssueKey = issuekey;
   };
   
   $scope.isCurrentIssueKey = function(issuekey) {
@@ -468,6 +464,19 @@ voter3sat.controller('GameCtrl', ['$scope', 'GameService', function($scope, Game
     };
   };
 
+  $scope.stepIssue = function(stepval) {
+    var issue = $scope.getCurrentIssue();
+    if (issue == null) {
+      return;
+    }
+
+    var currentIssueIndex = issue.index;
+    var numIssues = GameService.sortedIssues.length;
+    
+    currentIssueIndex = (currentIssueIndex + stepval + numIssues) % numIssues;
+    currentIssueKey = GameService.sortedIssues[currentIssueIndex].key;
+  };
+
   
   $scope.getVoterIssueOpinionClasses = function(voter, issuekey) {
     var voterAgrees = voter.opinions[issuekey] === GameService.platform[issuekey];
@@ -478,5 +487,7 @@ voter3sat.controller('GameCtrl', ['$scope', 'GameService', function($scope, Game
       currentissue: isIssueCurrent
     }
   };
+  
+  
 }]);
 

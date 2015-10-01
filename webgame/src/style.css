@@ -96,11 +96,18 @@ ul {
 }
 
 .issueblurb {
-    opacity: 0;
-    font-size: 12px;
-    height: 2em;
-    margin-left: 10px;
-    white-space: normal;
+  font-size: 12px;
+  white-space: normal;
+  width: 240px;
+}
+.issueprocon {
+  font-weight: bold;
+}
+.platformissuepro .issueprocon{
+  color: #4a4;
+}
+.platformissuecon .issueprocon{
+  color: #c44;
 }
 
 .issueitem:hover .issueblurb {
@@ -170,7 +177,7 @@ ul {
   font-weight: bold;
   margin: 0 10px;
   text-align: center;
-  vertical-align: middle;
+  vertical-align: top;
 }
 .issueswitchimage {
   display: inline-block;
@@ -228,7 +235,7 @@ ul {
 }
 
 .votestotal {
-    color: #aaa;
+    color: #666;
 }
 
 

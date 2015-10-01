@@ -33,6 +33,49 @@
       </div>
       
       <div class="game" data-ng-controller="GameCtrl">
+        <div class="platform">
+                  <div class="voterlead">
+              The Voters 
+          </div>
+          <div class="voterprogress">
+            <span class="voterprogressstats">
+              <span class="votessecured" data-ng-bind="countVotersSecured()"></span>
+              /
+              <span class="votestotal" data-ng-bind="GameService.voters.length"></span>
+            </span>
+            votes secured
+          </div>
+            
+          <div class="voterexplain instructiontext">
+            <ul>
+              <li>You must convince <em>every</em> voter to vote for you.</li>
+              <li>Each voter has a strong opinion about <em>three</em> issues.</li>
+              <li>A voter will vote for you if they agree with you on at least <em>one</em>
+                  of their three personal issues.</li>
+              <li>Flip your stances on issues to switch which voters agree with you.</li>
+              <li>A winning combination of stances will match at least <em>one</em> personal top issue of <em>every</em> voter</li>
+              <li>You can only make {{getFlips().length}} flipflops.</li>
+            </ul>
+          </div>
+          
+          <div class="flipflops">
+            <div class="flipflop" data-ng-repeat="flip in getFlips() track by $index" data-ng-class="flip ? 'flipped' : 'unflipped'">
+                <div class="flipcrossout"></div>
+            </div>
+          </div>
+          
+          <div class="winner" data-ng-show="!!GameService.voters.length && GameService.isPlatformWinning()">
+            <div class="winnerburst">
+            </div>
+          </div>
+          
+          <div class="loser" data-ng-show="!!GameService.voters.length && GameService.didPlayerLose()">
+            <div class="loserburst">
+            </div>
+          </div>
+          
+        </div>
+      
       <!--
         <div class="platform">
           <div class="platformlead">
@@ -41,8 +84,6 @@
           <div class="platformexplain instructiontext">
             <ul>
               <li>Tap on an issue to flipflop your stance on it.</li>
-              <li>A winning combination of stances will match at least <em>one</em> personal top issue of <em>every</em> voter</li>
-              <li>You have a limited number of flipflops you can make.</li>
             </ul>
           </div>
           <div class="issuelist">
@@ -60,54 +101,18 @@
             </div>
           </div>
 
-          <div class="flipflops">
-            <div class="flipflop" data-ng-repeat="flip in getFlips() track by $index" data-ng-class="flip ? 'flipped' : 'unflipped'">
-                <div class="flipcrossout"></div>
-            </div>
-          </div>
-          
-          <div class="winner" data-ng-show="!!GameService.voters.length && GameService.isPlatformWinning()">
-            <div class="winnerburst">
-            </div>
-          </div>
-          
-          <div class="loser" data-ng-show="!!GameService.voters.length && GameService.didPlayerLose()">
-            <div class="loserburst">
-            </div>
-          </div>
         </div>
         -->
         
-        <div class="voters">
-        <!--
-          <div class="voterlead">
-              The Voters 
-          </div>
-          <div class="voterprogress">
-            <span class="voterprogressstats">
-              <span class="votessecured" data-ng-bind="countVotersSecured()"></span>
-              /
-              <span class="votestotal" data-ng-bind="GameService.voters.length"></span>
-            </span>
-            votes secured
-          </div>
-            
-          <div class="voterexplain instructiontext">
-            <ul>
-              <li>You must convince <em>all</em> of these voters to vote for you.</li>
-              <li>A voter will vote for you if they agree with you on at least <em>one</em>
-                  of their personal top issues.</li>
-            </ul>
-          </div>
-          -->
-            
+        <div class="voters">            
           <div class="voterlist">
-            <div class="issuedetails">
-              <div class="issuenav previssue">
+            <div class="issuedetails"
+                data-ng-class="GameService.platform[getCurrentIssue().key] ? 'platformissuepro' : 'platformissuecon'">
+              <div class="issuenav previssue"
+                  data-ng-click="stepIssue(-1)">
                 &lt;
               </div>
               <div class="issueswitch"
-                  data-ng-class="GameService.platform[getCurrentIssue().key] ? 'platformissuepro' : 'platformissuecon'"
                   data-ng-click="flip(getCurrentIssue())">
                 <div class="issuelabelpro">
                   FOR
@@ -119,8 +124,13 @@
               </div>
               <div class="issuedetailsbody">
                 <div class="issuename" data-ng-bind="getCurrentIssue().issuetext"></div>
+                <div class="issueblurb">
+                  Your stance: &ldquo;I believe in
+                  <span class="issueprocon" data-ng-bind="GameService.platform[getCurrentIssue().key] ? getCurrentIssue().textpro : getCurrentIssue().textcon"></span>&rdquo;.
+                </div>
               </div>
-              <div class="issuenav nextissue">
+              <div class="issuenav nextissue"
+                  data-ng-click="stepIssue(1)">
                 &gt;
               </div>
             </div>
