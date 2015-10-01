@@ -102,6 +102,29 @@
           -->
             
           <div class="voterlist">
+            <div class="issuedetails">
+              <div class="issuenav previssue">
+                &lt;
+              </div>
+              <div class="issueswitch"
+                  data-ng-class="GameService.platform[getCurrentIssue().key] ? 'platformissuepro' : 'platformissuecon'"
+                  data-ng-click="flip(getCurrentIssue())">
+                <div class="issuelabelpro">
+                  FOR
+                </div>
+                <div class="issueswitchimage gridicon"></div>
+                <div class="issuelabelcon">
+                  AGAINST
+                </div>
+              </div>
+              <div class="issuedetailsbody">
+                <div class="issuename" data-ng-bind="getCurrentIssue().issuetext"></div>
+              </div>
+              <div class="issuenav nextissue">
+                &gt;
+              </div>
+            </div>
+          
             <table class="votertable">
               <thead>
                 <tr>

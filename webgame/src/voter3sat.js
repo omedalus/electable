@@ -386,6 +386,12 @@ voter3sat.controller('ConfigCtrl', ['$scope', 'GameService', function($scope, Ga
 voter3sat.controller('GameCtrl', ['$scope', 'GameService', function($scope, GameService) {
   $scope.GameService = GameService;
   
+  $scope.$watch('GameService.sortedIssues', function(sortedIssues) {
+    if (sortedIssues && _.size(sortedIssues) > 0) {
+      $scope.setCurrentIssueKey(sortedIssues[0].key);
+    }
+  });
+  
   $scope.flip = function(issue) {
     GameService.flipStance(issue);
   };
@@ -445,6 +451,11 @@ voter3sat.controller('GameCtrl', ['$scope', 'GameService', function($scope, Game
   
   $scope.isCurrentIssueKey = function(issuekey) {
     return (currentIssueKey === issuekey);
+  };
+
+  $scope.getCurrentIssue = function() {
+    return (!currentIssueKey || !(currentIssueKey in GameService.issues)) ? null :
+        GameService.issues[currentIssueKey];
   };
 
   $scope.getIssueRowClasses = function(issuekey) {
