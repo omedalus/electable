@@ -79,6 +79,7 @@
         -->
         
         <div class="voters">
+        <!--
           <div class="voterlead">
               The Voters 
           </div>
@@ -98,6 +99,7 @@
                   of their personal top issues.</li>
             </ul>
           </div>
+          -->
             
           <div class="voterlist">
             <table class="votertable">
@@ -105,17 +107,18 @@
                 <tr>
                   <th></th> <!-- Make room for the voter icon. -->
                   <th class="platformissue" data-ng-repeat="issue in GameService.sortedIssues"
-                      data-ng-class="getIssueRowClasses(issue.key)">
+                      data-ng-class="getIssueRowClasses(issue.key)"
+                      data-ng-click="setCurrentIssueKey(issue.key)">
                     <div class="issuelabelpro">
                       FOR
-                    <div>
+                    </div>
                     <div class="platformissuebox" 
                         data-ng-click="setCurrentIssue(issue.key)">
                       <img class="gridicon" src="{{issue.img}}" />
                     </div>
                     <div class="issuelabelcon">
                       AGAINST
-                    <div>
+                    </div>
                   </th>
                 </tr>
               </thead>
@@ -126,7 +129,7 @@
                   <td class="voterpic gridicon" data-ng-style="voterImageStyle(voter)"></td>
                   
                   <td class="voterissue" data-ng-repeat="issue in GameService.sortedIssues"
-                      data-ng-class="voter.opinions[issue.key] == GameService.platform[issue.key] ? 'voteragreesonissue' : 'voterdisagreesonissue'">
+                      data-ng-class="getVoterIssueOpinionClasses(voter, issue.key)">
                     <div class="voterissuebox" data-ng-show="voterCaresAboutIssue(voter, issue.key)">
                     </div>
                   </td>

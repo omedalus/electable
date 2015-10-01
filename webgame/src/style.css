@@ -1,57 +1,57 @@
 html {
-    cursor: default;
-    margin: 0;
-    padding: 0;
-    
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  cursor: default;
+  margin: 0;
+  padding: 0;
+  
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body {
-    background-color: #137EC0;
+  background-color: #137EC0;
 }
 
 .config input {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .game {
-    font-family: sans-serif;
-    font-size: 14px;
-    margin: 20px auto;
-    width: 800px;
+  font-family: sans-serif;
+  font-size: 14px;
+  margin: 20px auto;
+  width: 800px;
 }
 
 .platform {
-    background-color: #59a4d3;
-    border: 1px solid #008;
-    border-radius: 10px;
-    color: white;
-    float: left;
-    margin-right: 20px;
-    padding: 10px;
-    white-space: normal;
-    width: 260px;
+  background-color: #59a4d3;
+  border: 1px solid #008;
+  border-radius: 10px;
+  color: white;
+  float: left;
+  margin-right: 20px;
+  padding: 10px;
+  white-space: normal;
+  width: 260px;
 }
 
 .platformlead {
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .instructiontext {
-    font-size: 12px;
-    white-space: normal;
+  font-size: 12px;
+  white-space: normal;
 }
 
 ul {
-    margin: 0;
-    padding-left: 3ex;
-    list-style-position: outside;
+  margin: 0;
+  padding-left: 3ex;
+  list-style-position: outside;
 }
 
 .gridicon {
@@ -101,15 +101,24 @@ ul {
 }
 
 .currentissue {
-  background: #ff8;
+  background: #cc8;
 }
 
 .issuelabelpro {
   color: #0a0;
+  opacity: 0;
 }
 
 .issuelabelcon {
   color: #822;
+  opacity: 0;
+}
+
+.platformissuepro .issuelabelpro {
+  opacity: 1;  
+}
+.platformissuecon .issuelabelcon {
+  opacity: 1;  
 }
 
 .flipflop {
@@ -168,7 +177,10 @@ tr.voterrow {
 
 tr.voterrow  td {
   border-bottom: 1px solid #448;
+  box-sizing: border-box;
   height: 32px;
+  padding-top: 4px;
+  vertical-align: top;
 }
 
 tr.voterrow:first-child  td {

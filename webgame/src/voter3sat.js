@@ -336,7 +336,7 @@ voter3sat.factory('IssueFactory', function() {
           issuetext: 'The Gender Pay Gap',
           textcon: 'Letting Employers/Employees Negotiate Pay',
           textpro: 'Enforcing Equal Pay For Women', 
-          img: 'gender-equality.png'
+          img: 'img/issues/gender-equality.png'
       },    
   };    
 
@@ -434,6 +434,38 @@ voter3sat.controller('GameCtrl', ['$scope', 'GameService', function($scope, Game
       voterisnotvotingforyou: !isVoterVotingForYou,
       rowexpanded: (currentVoter === voter)
     };
+  };
+  
+  // Current issue management.
+  var currentIssueKey = null; 
+
+  $scope.setCurrentIssueKey = function(issuekey) {
+    currentIssueKey = (currentIssueKey === issuekey) ? null : issuekey;
+  };
+  
+  $scope.isCurrentIssueKey = function(issuekey) {
+    return (currentIssueKey === issuekey);
+  };
+
+  $scope.getIssueRowClasses = function(issuekey) {
+    var isIssueCurrent = (currentIssueKey === issuekey);
+    var isPlatformPro = GameService.platform[issuekey];
+    return {
+      platformissuepro: isPlatformPro,
+      platformissuecon: !isPlatformPro,
+      currentissue: isIssueCurrent
+    };
+  };
+
+  
+  $scope.getVoterIssueOpinionClasses = function(voter, issuekey) {
+    var voterAgrees = voter.opinions[issuekey] === GameService.platform[issuekey];
+    var isIssueCurrent = (currentIssueKey === issuekey);
+    return {
+      voteragreesonissue: voterAgrees,
+      voterdisagreesonissue: !voterAgrees,
+      currentissue: isIssueCurrent
+    }
   };
 }]);
 
