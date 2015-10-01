@@ -250,6 +250,13 @@ voter3sat.factory('IssueFactory', function() {
           textpro: 'A Woman\'s Right To Choose', 
           img: 'img/issues/embryo.png'
       },
+      'blacklivesmatter': {
+          key: 'blacklivesmatter', 
+          issuetext: 'Black Lives Matter',
+          textcon: 'Permitting Cops To Protect Themselves Against Dangerous Thugs', 
+          textpro: 'Getting Cops To Stop Shooting Unarmed Black Teens', 
+          img: 'img/issues/blacklives.jpg'
+      },    
       'borders': {
           key: 'borders', 
           issuetext: 'Border Control',
@@ -306,41 +313,48 @@ voter3sat.factory('IssueFactory', function() {
           textpro: 'Supporting Israel', 
           img: 'img/issues/israel.png'
       },
+      'islam': {
+        key: 'islam', 
+        issuetext: 'Muslim Outreach',
+        textcon: 'Rejecting Islam As Barbaric And Backward', 
+        textpro: 'Reaching Out To The Muslim World', 
+        img: 'img/issues/islam.gif'
+      },
       'military': {
-          key: 'military', 
-          issuetext: 'Military Spending',
-          textcon: 'Defunding The Military', 
-          textpro: 'A Strong National Defense', 
-          img: 'img/issues/tank.png'
+        key: 'military', 
+        issuetext: 'Military Spending',
+        textcon: 'Defunding The Military', 
+        textpro: 'A Strong National Defense', 
+        img: 'img/issues/tank.png'
       },      
       'minimumwage': {
-          key: 'minimumwage', 
-          issuetext: 'The Minimum Wage',
-          textcon: 'Letting Employers/Employees Negotiate Pay',
-          textpro: 'Raising The Minimum Wage', 
-          img: 'img/issues/cashier.png'
-      },    
+        key: 'minimumwage', 
+        issuetext: 'The Minimum Wage',
+        textcon: 'Letting Employers/Employees Negotiate Pay',
+        textpro: 'Raising The Minimum Wage', 
+        img: 'img/issues/cashier.png'
+      },
       'studentloans': {
-          key: 'studentloans',
-          issuetext: 'Student Loan Assistance',
-          textcon: 'Letting College Students Find Private Lenders', 
-          textpro: 'Federally Subsidizing All College Tuition', 
-          img: 'img/issues/diploma.png'
+        key: 'studentloans',
+        issuetext: 'Student Loan Assistance',
+        textcon: 'Letting College Students Find Private Lenders', 
+        textpro: 'Federally Subsidizing All College Tuition', 
+        img: 'img/issues/diploma.png'
       },
       'vaccines': {
-          key: 'vaccines', 
-          issuetext: 'Vaccination',
-          textcon: 'Letting Parents Decide What\'s Best For Their Child', 
-          textpro: 'Mandatory Vaccination', 
-          img: 'img/issues/vaccination.png'
+        key: 'vaccines', 
+        issuetext: 'Vaccination',
+        textcon: 'Letting Parents Decide What\'s Best For Their Child', 
+        textpro: 'Mandatory Vaccination', 
+        img: 'img/issues/vaccination.png'
       },
       'womansalary': {
-          key: 'womansalary', 
-          issuetext: 'Addressing The Gender Pay Gap',
-          textcon: 'Letting Employers/Employees Negotiate Pay',
-          textpro: 'Enforcing Equal Pay For Women', 
-          img: 'img/issues/gender-equality.png'
-      },    
+        key: 'womansalary', 
+        issuetext: 'Addressing The Gender Pay Gap',
+        textcon: 'Letting Employers/Employees Negotiate Pay',
+        textpro: 'Enforcing Equal Pay For Women', 
+        img: 'img/issues/gender-equality.png'
+      },
   };    
 
   var factory = {};
@@ -426,6 +440,10 @@ voter3sat.controller('GameCtrl', ['$document', '$scope', 'GameService',
   });
   
   $scope.$watch('GameService.sortedIssues', function(sortedIssues) {
+    $scope.showSolution = false;
+    currentVoter = null;
+    currentIssueKey = null;
+
     if (sortedIssues && _.size(sortedIssues) > 0) {
       $scope.setCurrentIssueKey(sortedIssues[0].key);
     }
