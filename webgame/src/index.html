@@ -65,7 +65,7 @@
             </div>
           </div>
           
-          <div class="winner" data-ng-show="!!GameService.voters.length && GameService.isPlatformWinning()">
+          <div class="winner" data-ng-show="!!GameService.voters.length && GameService.isPlatformWinning() && !GameService.didPlayerLose()">
             <div class="winnerburst">
             </div>
           </div>
@@ -73,6 +73,16 @@
           <div class="loser" data-ng-show="!!GameService.voters.length && GameService.didPlayerLose()">
             <div class="loserburst">
             </div>
+          </div>
+          
+          <div class="endbuttons" data-ng-show="!GameService.isGameOn()">
+            <button data-ng-click="doGenerate()">
+              Generate another board &gt;&gt;
+            </button>
+            
+            <button data-ng-click="showSolution=true">
+              Show solution
+            </button>
           </div>
           
         </div>
@@ -105,7 +115,7 @@
         </div>
         -->
         
-        <div class="voters">            
+        <div class="voters">
           <div class="voterlist">
             <div class="issuedetails"
                 data-ng-class="GameService.platform[getCurrentIssue().key] ? 'platformissuepro' : 'platformissuecon'">
@@ -147,6 +157,7 @@
                       FOR
                     </div>
                     <div class="platformissuebox" 
+                        data-ng-class="showSolution && GameService.winningPlatform[issue.key] != GameService.platform[issue.key] ? 'issuestancewrong' : ''"
                         data-ng-click="setCurrentIssue(issue.key)">
                       <img class="gridicon" src="{{issue.img}}" />
                     </div>
@@ -170,23 +181,31 @@
                 </tr>
               </tbody>
             </table>
+          </div>
           
-            <!--
-            <div class="voter" data-ng-repeat="voter in GameService.voters"
-                data-ng-class="GameService.isVoterVotingForYou(voter) ? 'voterisvotingforyou' : ''">
-              <div class="voterimage" data-ng-style="voterImageStyle(voter)"></div>
-              <div class="voterbody">
-                <div class="voteropinions">
-                  <div class="voteropinion" data-ng-repeat="issuekey in voter.sortedIssueKeys"
-                      data-ng-class="voter.opinions[issuekey] ? 'issuepro' : 'issuecon'">
-                    <span class="votercheck" 
-                        data-ng-class="voter.opinions[issuekey] == GameService.platform[issuekey] ? 'votercheckshow' : ''"></span>
-                    <span data-ng-bind="GameService.issues[issuekey].issuetext"></span>
-                  </div>
-                </div>
-              </div>
+          <div class="voterinterview"
+              data-ng-class="GameService.isVoterVotingForYou(getCurrentVoter()) ? 'voterinterviewsupport' : 'voterinterviewoppose'">
+            I am
+            <ul>
+              <li data-ng-repeat="issuekey in getCurrentVoter().sortedIssueKeys"
+                  data-ng-class="getCurrentVoter().opinions[issuekey] ? 'issuepro' : 'issuecon'">
+                <span data-ng-show="getCurrentVoter().opinions[issuekey]">
+                  FOR
+                </span>
+                <span data-ng-show="!getCurrentVoter().opinions[issuekey]">
+                  AGAINST
+                </span>
+                <span data-ng-bind="GameService.issues[issuekey].issuetext"></span>
+              </li>
+            </ul>
+            <div class="voteragreement" data-ng-show="GameService.isVoterVotingForYou(getCurrentVoter())">
+              I like your views on
+              <span class="voteragreementlist" data-ng-bind="getVoterAgreementString(getCurrentVoter())"></span>!
+              You&rsquo;ve got my vote!
             </div>
-            -->
+            <div class="voterdisagreement" data-ng-hide="GameService.isVoterVotingForYou(getCurrentVoter())">
+              You share none of my views. I will not vote for you.
+            </div>
           </div>
         </div>
       </div>

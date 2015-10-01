@@ -157,16 +157,8 @@ voter3sat.service('GameService', ['$rootScope', 'IssueFactory', function($rootSc
               winningplatformbits |= 1 << issue.index;
           }
       });
-      
-      console.log('=============== NEW GAME ===============================');
-      console.log('Winning platform:');
-      _.chain(issues).
-        sortBy(function(issue, issuekey) {
-            return issue.index;
-        }).
-        each(function(issue) {
-            console.log(issue.key + ': ' + platform[issue.key]);
-        });
+
+      var winningPlatform = _.clone(platform);
       
       // Make the starting platform be floor(n/2) bits away from the
       // winning platform, to maximize the user's starting entropy
@@ -188,10 +180,13 @@ voter3sat.service('GameService', ['$rootScope', 'IssueFactory', function($rootSc
       
       GameService.voters = voters;
       GameService.platform = platform;
+      GameService.winningPlatform = winningPlatform;
       GameService.flips = {
           permitted: numFlips,
           used: 0
-      }
+      };
+      
+      GameService.playerLost = false;
       
       // Check ourselves!
       var numOtherWinning = checkVictoryConditions(winningplatformbits);
@@ -207,14 +202,18 @@ voter3sat.service('GameService', ['$rootScope', 'IssueFactory', function($rootSc
   };
   
   this.flipStance = function(issue) {
-      GameService.platform[issue.key] = !GameService.platform[issue.key];
-      GameService.flips.used++;
+    GameService.platform[issue.key] = !GameService.platform[issue.key];
+    GameService.flips.used++;
+    
+    if (GameService.didPlayerLose()) {
+      GameService.playerLost = true;
+    }
   };
   
   this.isVoterVotingForYou = function(voter) {
-      return _.any(voter.opinions, function(opinion, issuekey) {
-          return opinion === GameService.platform[issuekey];
-      });
+    return !!voter && _.any(voter.opinions, function(opinion, issuekey) {
+        return opinion === GameService.platform[issuekey];
+    });
   };
   
   this.isPlatformWinning = function() {
@@ -225,8 +224,9 @@ voter3sat.service('GameService', ['$rootScope', 'IssueFactory', function($rootSc
   };
   
   this.didPlayerLose = function() {
-      return GameService.flips.used >= GameService.flips.permitted && 
-          !GameService.isPlatformWinning();
+      return GameService.playerLost || 
+          (GameService.flips.used >= GameService.flips.permitted && 
+          !GameService.isPlatformWinning());
   };
   
   this.isGameOn = function() {
@@ -417,6 +417,15 @@ voter3sat.controller('GameCtrl', ['$document', '$scope', 'GameService',
     }
   });
   
+  $scope.doGenerate = function() {
+    $scope.showSolution = false;
+    currentVoter = null;
+    currentIssueKey = null;
+    
+    // Start again, with the same # issues.
+    GameService.start(GameService.sortedIssues.length);
+  };  
+  
   $scope.flip = function(issue) {
     GameService.flipStance(issue);
   };
@@ -452,6 +461,23 @@ voter3sat.controller('GameCtrl', ['$document', '$scope', 'GameService',
 
   $scope.setCurrentVoter = function(voter) {
     currentVoter = (currentVoter === voter) ? null : voter;
+    
+    _.defer(function() {
+      var expandedRow = $('.voterrow.rowexpanded');
+      var vi = $('.voterinterview');
+      if (!expandedRow.length) {
+        vi.hide();
+        return;
+      }
+      
+      var postop = expandedRow.position().top;
+      vi.css('top', postop + 'px');
+      vi.show();
+    });
+  };
+  
+  $scope.getCurrentVoter = function() {
+    return currentVoter;
   };
   
   $scope.isCurrentVoter = function(voter) {
@@ -509,14 +535,43 @@ voter3sat.controller('GameCtrl', ['$document', '$scope', 'GameService',
   
   $scope.getVoterIssueOpinionClasses = function(voter, issuekey) {
     var voterAgrees = voter.opinions[issuekey] === GameService.platform[issuekey];
+    var voterOpinion = voter.opinions[issuekey];
     var isIssueCurrent = (currentIssueKey === issuekey);
     return {
       voteragreesonissue: voterAgrees,
       voterdisagreesonissue: !voterAgrees,
+      platformissuepro: voterOpinion,
+      platformissuecon: !voterOpinion,
       currentissue: isIssueCurrent
     }
   };
   
-  
+  $scope.getVoterAgreementString = function(voter) {
+    if (!voter) {
+      return null;
+    }
+    
+    var agreementTexts = [];
+    for (var i = 0; i < voter.sortedIssueKeys.length; i++) {
+      var issuekey = voter.sortedIssueKeys[i];
+      if (voter.opinions[issuekey] === GameService.platform[issuekey]) {
+        agreementTexts.push(GameService.issues[issuekey].issuetext);
+      }
+    }
+
+    switch (agreementTexts.length) {
+      case 1:
+      return agreementTexts[0];
+      
+      case 2:
+      return agreementTexts[0] + ' and ' + agreementTexts[1];
+      
+      case 3:
+      return agreementTexts[0] + ', ' + agreementTexts[1] + ', and ' + agreementTexts[2];
+      
+      default:
+      return null;
+    };
+  };
 }]);
 

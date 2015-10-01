@@ -194,6 +194,11 @@ ul {
   background-image: url('img/switch-off-icon.png');
 }
 
+.issuestancewrong img {
+  border: 4px solid #f88;
+  box-sizing: border-box;
+}
+
 
 .flipflop {
     background-image: url('http://images.lacrosseunlimited.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/R/a/Rainbow_Sandals_Premier_Leathers_tan_sierra_301ALTS0_srbr_42_2.png');
@@ -218,6 +223,7 @@ ul {
 
 .voters {
     float: right;
+    position: relative;
     width: 480px;
 }
 
@@ -266,7 +272,7 @@ tr.voterrow:hover {
 }
 
 tr.voterrow.rowexpanded {
-  height: 64px;
+  height: 164px;
 }
 
 
@@ -301,6 +307,29 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
   background-color: #444;
 }
 
+.voterinterview {
+  background-color: #fff;
+  border: 2px solid #228;
+  border-radius: 10px;
+  display: none;
+  margin-left: 50px;
+  margin-top: 32px;
+  padding: 10px;
+  position: absolute;
+}
+
+.voterinterview ul {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.voteragreementlist {
+  font-weight: bold;
+}
+
+.voterinterviewoppose {
+  background-color: #aaa;
+}
 
 .winnerburst {
     background-image: url('http://res.freestockphotos.biz/pictures/7/7240-illustration-of-a-burst-with-win-text-pv.png');
@@ -314,4 +343,14 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
     background-size: 260px 260px;
     height: 260px;
     width: 260px;
+}
+
+.endbuttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.endbuttons button {
+  margin-top: 5px;
+  width: 200px;
 }
