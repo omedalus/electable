@@ -4,12 +4,16 @@
     <title>Electable!</title>
     
     <!-- Third-party dependencies. -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="thirdparty/underscore-min.js"></script>
+    <script src="thirdparty/jquery-1.11.3.min.js"></script>
+    <script src="thirdparty/angular.min.js"></script>
     
     <!-- AngularJS app. -->
-    <script src="voter3sat.js"></script>
+    <script src="voter3sat/app.js"></script>
+    <script src="voter3sat/board-controller.js"></script>
+    <script src="voter3sat/board-service.js"></script>
+    <script src="voter3sat/issue-factory.js"></script>
+    <script src="voter3sat/config-controller.js"></script>
     
     <!-- CSS stylesheets. -->
     <link href="style.css" type="text/css" rel="stylesheet" />
@@ -33,7 +37,7 @@
         </div>
       </div>
       
-      <div class="game" data-ng-controller="GameCtrl" data-ng-keyup="keyup($event)">
+      <div class="game" data-ng-controller="BoardCtrl" data-ng-keyup="keyup($event)">
         <div class="platform">
           <div class="voterlead">
             The Voters 
@@ -42,7 +46,7 @@
             <span class="voterprogressstats">
               <span class="votessecured" data-ng-bind="countVotersSecured()"></span>
               /
-              <span class="votestotal" data-ng-bind="GameService.voters.length"></span>
+              <span class="votestotal" data-ng-bind="BoardService.voters.length"></span>
             </span>
             votes secured
           </div>
@@ -65,17 +69,17 @@
             </div>
           </div>
           
-          <div class="winner" data-ng-show="!!GameService.voters.length && GameService.isPlatformWinning() && !GameService.didPlayerLose()">
+          <div class="winner" data-ng-show="!!BoardService.voters.length && BoardService.isPlatformWinning() && !BoardService.didPlayerLose()">
             <div class="winnerburst">
             </div>
           </div>
           
-          <div class="loser" data-ng-show="!!GameService.voters.length && GameService.didPlayerLose()">
+          <div class="loser" data-ng-show="!!BoardService.voters.length && BoardService.didPlayerLose()">
             <div class="loserburst">
             </div>
           </div>
           
-          <div class="endbuttons" data-ng-show="!GameService.isGameOn()">
+          <div class="endbuttons" data-ng-show="!BoardService.isGameOn()">
             <button data-ng-click="doGenerate()">
               Generate another board &gt;&gt;
             </button>
@@ -98,11 +102,11 @@
             </ul>
           </div>
           <div class="issuelist">
-            <div class="issueitem" data-ng-repeat="issue in GameService.sortedIssues"
-                data-ng-class="GameService.platform[issue.key] ? 'issuepro' : 'issuecon'"
+            <div class="issueitem" data-ng-repeat="issue in BoardService.sortedIssues"
+                data-ng-class="BoardService.platform[issue.key] ? 'issuepro' : 'issuecon'"
                 data-ng-click="flip(issue)">
               <div>
-                <span class="issueprocon" data-ng-bind="GameService.platform[issue.key] ? 'For' : 'Against'"></span>
+                <span class="issueprocon" data-ng-bind="BoardService.platform[issue.key] ? 'For' : 'Against'"></span>
                 <span class="issuename" data-ng-bind="issue.issuetext"></span>
               </div>
               <div class="issueblurb">
@@ -118,7 +122,7 @@
         <div class="voters">
           <div class="voterlist">
             <div class="issuedetails"
-                data-ng-class="GameService.platform[getCurrentIssue().key] ? 'platformissuepro' : 'platformissuecon'">
+                data-ng-class="BoardService.platform[getCurrentIssue().key] ? 'platformissuepro' : 'platformissuecon'">
               <div class="issuenav previssue"
                   data-ng-click="stepIssue(-1)">
                 &lt;
@@ -137,7 +141,7 @@
                 <div class="issuename" data-ng-bind="getCurrentIssue().issuetext"></div>
                 <div class="issueblurb">
                   Your stance: &ldquo;I believe in
-                  <span class="issueprocon" data-ng-bind="GameService.platform[getCurrentIssue().key] ? getCurrentIssue().textpro : getCurrentIssue().textcon"></span>&rdquo;.
+                  <span class="issueprocon" data-ng-bind="BoardService.platform[getCurrentIssue().key] ? getCurrentIssue().textpro : getCurrentIssue().textcon"></span>&rdquo;.
                 </div>
               </div>
               <div class="issuenav nextissue"
@@ -150,14 +154,14 @@
               <thead>
                 <tr>
                   <th></th> <!-- Make room for the voter icon. -->
-                  <th class="platformissue" data-ng-repeat="issue in GameService.sortedIssues"
+                  <th class="platformissue" data-ng-repeat="issue in BoardService.sortedIssues"
                       data-ng-class="getIssueRowClasses(issue.key)"
                       data-ng-click="setCurrentIssueKey(issue.key)">
                     <div class="issuelabelpro">
                       FOR
                     </div>
                     <div class="platformissuebox" 
-                        data-ng-class="showSolution && GameService.winningPlatform[issue.key] != GameService.platform[issue.key] ? 'issuestancewrong' : ''"
+                        data-ng-class="showSolution && BoardService.winningPlatform[issue.key] != BoardService.platform[issue.key] ? 'issuestancewrong' : ''"
                         data-ng-click="setCurrentIssue(issue.key)">
                       <img class="gridicon" src="{{issue.img}}" />
                     </div>
@@ -168,12 +172,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="voterrow" data-ng-repeat="voter in GameService.voters"
+                <tr class="voterrow" data-ng-repeat="voter in BoardService.voters"
                     data-ng-class="getVoterRowClasses(voter)"
                     data-ng-click="setCurrentVoter(voter)">
                   <td class="voterpic gridicon" data-ng-style="voterImageStyle(voter)"></td>
                   
-                  <td class="voterissue" data-ng-repeat="issue in GameService.sortedIssues"
+                  <td class="voterissue" data-ng-repeat="issue in BoardService.sortedIssues"
                       data-ng-class="getVoterIssueOpinionClasses(voter, issue.key)">
                     <div class="voterissuebox" data-ng-show="voterCaresAboutIssue(voter, issue.key)">
                     </div>
@@ -184,7 +188,7 @@
           </div>
           
           <div class="voterinterview"
-              data-ng-class="GameService.isVoterVotingForYou(getCurrentVoter()) ? 'voterinterviewsupport' : 'voterinterviewoppose'">
+              data-ng-class="BoardService.isVoterVotingForYou(getCurrentVoter()) ? 'voterinterviewsupport' : 'voterinterviewoppose'">
             I am
             <ul>
               <li data-ng-repeat="issuekey in getCurrentVoter().sortedIssueKeys"
@@ -195,15 +199,15 @@
                 <span data-ng-show="!getCurrentVoter().opinions[issuekey]">
                   AGAINST
                 </span>
-                <span data-ng-bind="GameService.issues[issuekey].issuetext"></span>
+                <span data-ng-bind="BoardService.issues[issuekey].issuetext"></span>
               </li>
             </ul>
-            <div class="voteragreement" data-ng-show="GameService.isVoterVotingForYou(getCurrentVoter())">
+            <div class="voteragreement" data-ng-show="BoardService.isVoterVotingForYou(getCurrentVoter())">
               I like your views on
               <span class="voteragreementlist" data-ng-bind="getVoterAgreementString(getCurrentVoter())"></span>!
               You&rsquo;ve got my vote!
             </div>
-            <div class="voterdisagreement" data-ng-hide="GameService.isVoterVotingForYou(getCurrentVoter())">
+            <div class="voterdisagreement" data-ng-hide="BoardService.isVoterVotingForYou(getCurrentVoter())">
               You share none of my views. I will not vote for you.
             </div>
           </div>
