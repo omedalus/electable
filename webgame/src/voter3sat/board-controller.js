@@ -51,7 +51,7 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService',
     currentIssueKey = null;
     
     // Start again, with the same # issues.
-    BoardService.start(BoardService.sortedIssues.length);
+    BoardService.start(BoardService.sortedIssues ? BoardService.sortedIssues.length : 3);
   };  
   
   $scope.flip = function(issue) {
@@ -225,5 +225,7 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService',
       return null;
     };
   };
+  
+  $scope.doGenerate();
 }]);
 

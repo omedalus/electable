@@ -217,20 +217,21 @@ voter3sat.service('BoardService', ['$rootScope', 'IssueFactory', function($rootS
   
   this.isVoterVotingForYou = function(voter) {
     return !!voter && _.any(voter.opinions, function(opinion, issuekey) {
-        return opinion === BoardService.platform[issuekey];
+      return opinion === BoardService.platform[issuekey];
     });
   };
   
   this.isPlatformWinning = function() {
       return !!BoardService.voters &&
           _.all(BoardService.voters, function(voter) {
-              return BoardService.isVoterVotingForYou(voter);
+            return BoardService.isVoterVotingForYou(voter);
           });
   };
   
   this.didPlayerLose = function() {
       return BoardService.playerLost || 
-          (BoardService.flips.used >= BoardService.flips.permitted && 
+          (BoardService.flips &&
+          BoardService.flips.used >= BoardService.flips.permitted && 
           !BoardService.isPlatformWinning());
   };
   
