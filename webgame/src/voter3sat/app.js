@@ -12,6 +12,6 @@ voter3sat.config(['$routeProvider',
         controller: 'BoardCtrl'
       }).
       otherwise({
-        redirectTo: '/board'
+        redirectTo: '/home'
       });
   }]);

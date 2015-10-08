@@ -12,11 +12,44 @@ html {
 }
 
 body {
+  background-attachment: fixed;
   background-color: #137EC0;
+  background-image: url('img/Debate-Stage.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
 }
 
-.config input {
-  margin-right: 20px;
+button {
+  cursor: pointer;
+}
+
+.app {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.viewcontainer {
+  background-color: rgba(160,200,255,.95);
+  box-sizing: border-box;
+  border: 2px solid #00f;
+  border-radius: 10px;
+  box-shadow: 0 0 40px 20px #000;  
+  display: inline-block;
+  height: 600px;
+  margin: auto;
+  margin-top: 10px;
+  max-height: 600px;
+  max-width: 800px;
+  min-height: 600px;
+  min-width: 800px;
+  padding: 10px;
+  position: relative;
+  text-align: left;
+  width: 800px;
 }
 
 .game {
@@ -26,26 +59,31 @@ body {
   width: 800px;
 }
 
-.platform {
+.progresstracker {
   background-color: #59a4d3;
   border: 1px solid #008;
   border-radius: 10px;
   color: white;
-  float: left;
+  display: inline-block;
+  height: 520px;
   margin-right: 20px;
   padding: 10px;
+  vertical-align: top;
   white-space: normal;
-  width: 260px;
+  width: 60px;
 }
+
+.progresstracker.boardlost {
+  background-color: #f44;
+}
+.progresstracker.boardwon {
+  background-color: #4a4;
+}
+
 
 .platformlead {
   font-size: 20px;
   font-weight: bold;
-}
-
-.instructiontext {
-  font-size: 12px;
-  white-space: normal;
 }
 
 ul {
@@ -71,7 +109,7 @@ ul {
   height: 120px;
   margin-left: 32px;
   padding: 20px;
-  width: 448px;
+  width: 608px;
 }
 
 .issuelist {
@@ -111,12 +149,13 @@ ul {
 }
 
 .issueitem:hover .issueblurb {
-    opacity: 1;
+  opacity: 1;
 }
 
 .platformissue {
-  padding: 10px 0;
   cursor: pointer;
+  padding: 10px 0;
+  text-align: center;
 }
 
 .currentissue {
@@ -201,20 +240,20 @@ ul {
 
 
 .flipflop {
-    background-image: url('http://images.lacrosseunlimited.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/R/a/Rainbow_Sandals_Premier_Leathers_tan_sierra_301ALTS0_srbr_42_2.png');
-    background-size: 64px 64px;
-    display: inline-block;
-    height: 64px;
-    white-space: normal;
-    width: 64px;
+  background-image: url('http://images.lacrosseunlimited.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/R/a/Rainbow_Sandals_Premier_Leathers_tan_sierra_301ALTS0_srbr_42_2.png');
+  background-size: 64px 64px;
+  display: inline-block;
+  height: 64px;
+  white-space: normal;
+  width: 64px;
 }
 
 .flipcrossout {
-    background-image: url('http://www.aspals.com/redcross.gif');
-    background-size: 64px 64px;
-    display: inline-block;
-    height: 64px;
-    width: 64px;
+  background-image: url('http://www.aspals.com/redcross.gif');
+  background-size: 64px 64px;
+  display: inline-block;
+  height: 64px;
+  width: 64px;
 }
 
 .flipflop.unflipped .flipcrossout {
@@ -222,28 +261,27 @@ ul {
 }
 
 .voters {
-    float: right;
-    position: relative;
-    width: 480px;
+  display: inline-block;
+  position: relative;
+  width: 640px;
 }
 
 .voterlead {
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .voterprogress {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .votessecured {
-    color: white;
+  color: white;
 }
 
 .votestotal {
-    color: #666;
+  color: #666;
 }
-
 
 
 .votertable {
@@ -344,18 +382,41 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
   background-color: #aaa;
 }
 
-.winnerburst {
-    background-image: url('http://res.freestockphotos.biz/pictures/7/7240-illustration-of-a-burst-with-win-text-pv.png');
-    background-size: 300px;
-    height: 260px;
-    width: 300px;
+.statelevel.overlay {
+  margin: auto;
+  text-align: center;
+  background-color: rgba(255,255,255,.2);
+  box-shadow: 0 0 40px rgba(255,255,255,.4);
 }
 
+.statelevel img {
+  height: 260px;
+}
+
+.winner {
+  background-color: rgba(0,120,0,.2);
+  box-shadow: 0 0 40px rgba(0,120,0,.4);
+  padding: 40px;
+}
+.winnerburst {
+  background-image: url('http://res.freestockphotos.biz/pictures/7/7240-illustration-of-a-burst-with-win-text-pv.png');
+  background-size: 300px;
+  height: 260px;
+  margin: auto;
+  width: 300px;
+}
+
+.loser {
+  background-color: rgba(120,0,0,.2);
+  box-shadow: 0 0 40px rgba(120,0,0,.4);
+  padding: 40px;
+}
 .loserburst {
-    background-image: url('http://vignette1.wikia.nocookie.net/uncyclopedia/images/d/de/Lose.gif/revision/latest?cb=20070427230953');
-    background-size: 260px 260px;
-    height: 260px;
-    width: 260px;
+  background-image: url('http://vignette1.wikia.nocookie.net/uncyclopedia/images/d/de/Lose.gif/revision/latest?cb=20070427230953');
+  background-size: 260px 260px;
+  height: 260px;
+  margin: auto;
+  width: 260px;
 }
 
 .boardpostgamebuttons {
@@ -364,6 +425,105 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
 }
 
 .boardpostgamebuttons button {
-  margin-top: 5px;
-  width: 200px;
+  cursor: pointer;
+  height: 120px;
+  margin-top: 20px;
+  width: 60px;
+}
+.boardpostgamebuttons button img {
+    width: 32px;
+}
+
+#helpbutton {
+  background-image: url('img/help.png');
+  background-size: 32px 32px;
+  border-radius: 16px;
+  display: inline-block;
+  height: 32px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 32px;
+}
+
+@keyframes swivellybutton {
+  0% {transform: rotate(45deg);}
+  50% {transform: rotate(-45deg);}
+  100% {transform: rotate(45deg);}
+}
+
+.swivellybutton {
+  cursor: pointer;
+}
+
+.swivellybutton.buttonactive {
+  cursor: default;
+}
+
+.swivellybutton:hover,
+.swivellybutton.buttonactive {
+  animation: swivellybutton 1s infinite;
+  transform: rotate(20deg);
+}
+
+
+.overlayholder {
+  background-color: rgba(100,100,100,.6);
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 100%;
+  left: 0;
+  padding-top: 100px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  transition: opacity 1s, visibility 1s;
+  z-index: 1000;
+}
+.overlayholder.overlaydismissed {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.overlay {
+  display: inline-block;
+  margin: auto;
+  text-align: left;
+  width: 600px;
+}
+
+.helpctrl {
+  background-color: rgba(240,200,0,.9);
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #c80;
+  font-size: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px #000;
+}
+
+.bottombuttonholder {
+  margin-top: 40px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bottombuttonholder button {
+  padding: 10px 40px;
+}
+
+
+.homectrl  {
+  text-align: center;
+}
+
+.homectrl h1 {
+  color: #fff;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.homectrl button {
+  margin-top: 40px;
+  padding: 20px 40px;
 }

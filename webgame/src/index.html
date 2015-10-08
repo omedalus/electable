@@ -11,10 +11,17 @@
     
     <!-- AngularJS app. -->
     <script src="voter3sat/app.js"></script>
-    <script src="voter3sat/board-controller.js"></script>
-    <script src="voter3sat/board-service.js"></script>
+
     <script src="voter3sat/issue-factory.js"></script>
-    <script src="voter3sat/config-controller.js"></script>
+    <script src="voter3sat/state-factory.js"></script>
+
+    <script src="voter3sat/campaign-service.js"></script>
+    <script src="voter3sat/help-service.js"></script>
+    <script src="voter3sat/board-service.js"></script>
+
+    <script src="voter3sat/home-controller.js"></script>
+    <script src="voter3sat/board-controller.js"></script>
+    <script src="voter3sat/help-controller.js"></script>
     
     <!-- CSS stylesheets. -->
     <link href="style.css" type="text/css" rel="stylesheet" />
@@ -23,8 +30,12 @@
     <div class="app" data-ng-app="Voter3SAT">
       <div class="viewcontainer">
         <div data-ng-view></div>
+        
+        <div id="helpguide" class="overlayholder" data-ng-controller="HelpCtrl"
+            data-ng-show="HelpService.isHelpShowing()">
+          <div data-ng-include="'voter3sat/views/help.html'" class="overlay"></div>
+        </div>
       </div>
-      
     </div>
   </body>
 </html>

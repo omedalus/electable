@@ -1,6 +1,8 @@
-voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 
-    function($document, $scope, BoardService) {
+voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'CampaignService', 'HelpService',
+    function($document, $scope, BoardService, CampaignService, HelpService) {
   $scope.BoardService = BoardService;
+  $scope.CampaignService = CampaignService;
+  $scope.HelpService = HelpService;
   $scope.difficultyLevel = 1;
 
   $($document).keydown(function(e) {
@@ -46,17 +48,44 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService',
     }
   });
   
+  $scope.doAdvance = function() {
+    CampaignService.advanceBoard();
+    $scope.doGenerate();
+  };
+  
   $scope.doGenerate = function() {
     $scope.showSolution = false;
+    $scope.begingamesplashDismissed = false;
+    $scope.endgamesplashDismissed = false;
+    
     currentVoter = null;
     currentIssueKey = null;
     
     // Start again, with the same # issues.
-    BoardService.start(2 + parseInt($scope.difficultyLevel));
-  };  
+    BoardService.start(CampaignService.getCurrentBoard().numIssues);
+    
+    // Clear the state splasher.
+    setTimeout(function() {
+      $scope.$apply(function() {
+        $scope.begingamesplashDismissed = true;
+      });
+    }, 3000);
+  };
   
   $scope.flip = function(issue) {
+    var wasGameOnBeforeFlip = BoardService.isGameOn();
+
     BoardService.flipStance(issue);
+    
+    if (wasGameOnBeforeFlip && !BoardService.isGameOn()) {
+      // This flip ended the board. The user will see an end-board overlay.
+      // Set up an auto dismisser for it.
+      setTimeout(function() {
+        $scope.$apply(function() {
+          $scope.endgamesplashDismissed = true;
+        });
+      }, 1000);
+    }
   };
   
   $scope.getFlips = function() {
