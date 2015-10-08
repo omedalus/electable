@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Electable!</title>
+    
+    <!-- Third-party dependencies. -->
+    <script src="thirdparty/underscore-min.js"></script>
+    <script src="thirdparty/jquery-1.11.3.min.js"></script>
+    <script src="thirdparty/angular.min.js"></script>
+    <script src="thirdparty/angular-route.min.js"></script>
+    
+    <!-- AngularJS app. -->
+    <script src="voter3sat/app.js"></script>
+    <script src="voter3sat/board-controller.js"></script>
+    <script src="voter3sat/board-service.js"></script>
+    <script src="voter3sat/issue-factory.js"></script>
+    <script src="voter3sat/config-controller.js"></script>
+    
+    <!-- CSS stylesheets. -->
+    <link href="style.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app" data-ng-app="Voter3SAT">
+      <div class="viewcontainer">
+        <div data-ng-view></div>
+      </div>
+      
+    </div>
+  </body>
+</html>
+

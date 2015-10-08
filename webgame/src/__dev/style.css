@@ -1,0 +1,369 @@
+html {
+  cursor: default;
+  margin: 0;
+  padding: 0;
+  
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body {
+  background-color: #137EC0;
+}
+
+.config input {
+  margin-right: 20px;
+}
+
+.game {
+  font-family: sans-serif;
+  font-size: 14px;
+  margin: 20px auto;
+  width: 800px;
+}
+
+.platform {
+  background-color: #59a4d3;
+  border: 1px solid #008;
+  border-radius: 10px;
+  color: white;
+  float: left;
+  margin-right: 20px;
+  padding: 10px;
+  white-space: normal;
+  width: 260px;
+}
+
+.platformlead {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.instructiontext {
+  font-size: 12px;
+  white-space: normal;
+}
+
+ul {
+  margin: 0;
+  padding-left: 3ex;
+  list-style-position: outside;
+}
+
+.gridicon {
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+  background-position: center center;
+  height: 32px;
+  width: 32px;
+}
+
+
+.issuedetails {
+  background: #cc8;
+  box-sizing: border-box;
+  border-radius: 10px 10px 0 0;
+  display: inline-block;
+  height: 120px;
+  margin-left: 32px;
+  padding: 20px;
+  width: 448px;
+}
+
+.issuelist {
+    margin-top: 20px;
+}
+
+.issueitem {
+    cursor: pointer;
+    padding: 5px 15px;
+}
+
+.issuepro {
+    color: #8F8;
+}
+
+.issuecon {
+    color: #c66;
+}
+
+.issuename {
+    font-weight: bold;
+}
+
+.issueblurb {
+  font-size: 12px;
+  white-space: normal;
+  width: 240px;
+}
+.issueprocon {
+  font-weight: bold;
+}
+.platformissuepro .issueprocon{
+  color: #4a4;
+}
+.platformissuecon .issueprocon{
+  color: #c44;
+}
+
+.issueitem:hover .issueblurb {
+    opacity: 1;
+}
+
+.platformissue {
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.currentissue {
+  background: #cc8;
+}
+
+.issuelabelpro {
+  color: #0a0;
+  opacity: 0;
+}
+
+.issuelabelcon {
+  color: #822;
+  opacity: 0;
+}
+
+.platformissuepro .issuelabelpro {
+  opacity: 1;  
+}
+.platformissuecon .issuelabelcon {
+  opacity: 1;  
+}
+
+.issuedetailsbody {
+  display: inline-block;
+  padding: 10px;
+}
+
+.issuenav {
+  background: #eea;
+  border: 3px solid #844;
+  border-radius: 10px;
+  color: #844;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 32px;
+  font-weight: bold;
+  height: 64px;
+  line-height: 64px;
+}
+.issuenav:hover {
+  border-color: #ffc;
+  color: #ffc;
+}
+.issuenav:active {
+  background: #aa6;
+}
+.issuenav.previssue {
+  float: left;
+}
+.issuenav.nextissue {
+  float: right;
+}
+
+.issueswitch {
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  margin: 0 10px;
+  text-align: center;
+  vertical-align: top;
+}
+.issueswitchimage {
+  display: inline-block;
+  margin: auto;
+
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.platformissuepro .issueswitchimage {
+  background-image: url('img/switch-on-icon.png');
+}
+.platformissuecon .issueswitchimage {
+  background-image: url('img/switch-off-icon.png');
+}
+
+.issuestancewrong img {
+  border: 4px solid #f88;
+  box-sizing: border-box;
+}
+
+
+.flipflop {
+    background-image: url('http://images.lacrosseunlimited.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/R/a/Rainbow_Sandals_Premier_Leathers_tan_sierra_301ALTS0_srbr_42_2.png');
+    background-size: 64px 64px;
+    display: inline-block;
+    height: 64px;
+    white-space: normal;
+    width: 64px;
+}
+
+.flipcrossout {
+    background-image: url('http://www.aspals.com/redcross.gif');
+    background-size: 64px 64px;
+    display: inline-block;
+    height: 64px;
+    width: 64px;
+}
+
+.flipflop.unflipped .flipcrossout {
+    opacity: 0;
+}
+
+.voters {
+    float: right;
+    position: relative;
+    width: 480px;
+}
+
+.voterlead {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.voterprogress {
+    font-weight: bold;
+}
+
+.votessecured {
+    color: white;
+}
+
+.votestotal {
+    color: #666;
+}
+
+
+
+.votertable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr.voterrow {
+  cursor: pointer;
+}
+
+tr.voterrow  td {
+  border-bottom: 1px solid #448;
+  box-sizing: border-box;
+  height: 32px;
+  padding-top: 4px;
+  vertical-align: top;
+}
+
+tr.voterrow:first-child  td {
+  border-top: 1px solid #448;
+}
+
+tr.voterrow:hover {
+  background: #acf;
+}
+tr.voterrow:hover td{
+  background-color: transparent;
+}
+
+
+tr.voterrow.rowexpanded {
+  background: #acf;
+  height: 164px;
+}
+tr.voterrow.rowexpanded td{
+  background-color: transparent;
+}
+tr.voterrow.rowexpanded:hover {
+  background: #def;
+  height: 164px;
+}
+
+
+
+.voterpic {
+  background-image: url('img/user_blue_32.png');
+  height: 32px;
+  width: 32px;
+}
+
+tr.voterrow.voterisnotvotingforyou  .voterpic {
+  background-image: url('img/user_red.png');
+}
+
+
+.voterissue {
+  text-align: center;
+}
+
+.voterissuebox {
+  border: 1px solid #448;
+  border-radius: 10px;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+}
+
+.voterissue.voteragreesonissue .voterissuebox {
+  background-color: #fff;
+}
+.voterissue.voterdisagreesonissue .voterissuebox {
+  background-color: #444;
+}
+
+.voterinterview {
+  background-color: #fff;
+  border: 2px solid #228;
+  border-radius: 10px;
+  display: none;
+  margin-left: 50px;
+  margin-right: 10px;
+  margin-top: 32px;
+  padding: 10px;
+  position: absolute;
+}
+
+.voterinterview ul {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.voteragreementlist {
+  font-weight: bold;
+}
+
+.voterinterviewoppose {
+  background-color: #aaa;
+}
+
+.winnerburst {
+    background-image: url('http://res.freestockphotos.biz/pictures/7/7240-illustration-of-a-burst-with-win-text-pv.png');
+    background-size: 300px;
+    height: 260px;
+    width: 300px;
+}
+
+.loserburst {
+    background-image: url('http://vignette1.wikia.nocookie.net/uncyclopedia/images/d/de/Lose.gif/revision/latest?cb=20070427230953');
+    background-size: 260px 260px;
+    height: 260px;
+    width: 260px;
+}
+
+.endbuttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.endbuttons button {
+  margin-top: 5px;
+  width: 200px;
+}
