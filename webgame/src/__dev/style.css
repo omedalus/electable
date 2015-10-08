@@ -73,7 +73,7 @@ body {
   background-color: #f44;
 }
 .progresstracker.boardwon {
-  background-color: #4f4;
+  background-color: #4a4;
 }
 
 
@@ -378,28 +378,41 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
   background-color: #aaa;
 }
 
+.winner {
+  background-color: rgba(0,120,0,.2);
+  box-shadow: 0 0 40px rgba(0,120,0,.4);
+  padding: 40px;
+}
 .winnerburst {
-    background-image: url('http://res.freestockphotos.biz/pictures/7/7240-illustration-of-a-burst-with-win-text-pv.png');
-    background-size: 300px;
-    height: 260px;
-    width: 300px;
+  background-image: url('http://res.freestockphotos.biz/pictures/7/7240-illustration-of-a-burst-with-win-text-pv.png');
+  background-size: 300px;
+  height: 260px;
+  margin: auto;
+  width: 300px;
 }
 
+.loser {
+  background-color: rgba(120,0,0,.2);
+  box-shadow: 0 0 40px rgba(120,0,0,.4);
+  padding: 40px;
+}
 .loserburst {
-    background-image: url('http://vignette1.wikia.nocookie.net/uncyclopedia/images/d/de/Lose.gif/revision/latest?cb=20070427230953');
-    background-size: 260px 260px;
-    height: 260px;
-    width: 260px;
+  background-image: url('http://vignette1.wikia.nocookie.net/uncyclopedia/images/d/de/Lose.gif/revision/latest?cb=20070427230953');
+  background-size: 260px 260px;
+  height: 260px;
+  margin: auto;
+  width: 260px;
 }
 
-.endbuttons {
+.boardpostgamebuttons {
   margin-top: 20px;
   text-align: center;
 }
 
-.endbuttons button {
-  margin-top: 5px;
-  width: 200px;
+.boardpostgamebuttons button {
+  margin-top: 20px;
+  width: 60px;
+  height: 120px;
 }
 
 #helpbutton {
@@ -436,6 +449,7 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
 
 
 .overlayholder {
+  background-color: rgba(100,100,100,.6);
   box-sizing: border-box;
   height: 100%;
   left: 0;

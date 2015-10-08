@@ -150,6 +150,9 @@ voter3sat.service('BoardService', ['$rootScope', 'IssueFactory', function($rootS
     return numOtherWinning;
   };    
   
+  var playerLost = false;
+  var playerWon = false;
+  
   var init = function(numIssues) {
       var issues = IssueFactory.getIssues(numIssues); 
       
@@ -191,7 +194,8 @@ voter3sat.service('BoardService', ['$rootScope', 'IssueFactory', function($rootS
           used: 0
       };
       
-      BoardService.playerLost = false;
+      playerLost = false;
+      playerWon = false;
       
       // Check ourselves!
       var numOtherWinning = checkVictoryConditions(winningplatformbits);
@@ -210,8 +214,13 @@ voter3sat.service('BoardService', ['$rootScope', 'IssueFactory', function($rootS
     BoardService.platform[issue.key] = !BoardService.platform[issue.key];
     BoardService.flips.used++;
     
-    if (BoardService.didPlayerLose()) {
-      BoardService.playerLost = true;
+    if (!playerLost && !playerWon) {
+      if (BoardService.isPlatformWinning()) {
+        playerWon = true;
+      }
+      else if (BoardService.flips.used >= BoardService.flips.permitted) {
+        playerLost = true;
+      }
     }
   };
   
@@ -229,13 +238,15 @@ voter3sat.service('BoardService', ['$rootScope', 'IssueFactory', function($rootS
   };
   
   this.didPlayerLose = function() {
-      return BoardService.playerLost || 
-          (BoardService.flips &&
-          BoardService.flips.used >= BoardService.flips.permitted && 
-          !BoardService.isPlatformWinning());
+      return playerLost;
+  };
+  this.didPlayerWin = function() {
+      return playerWon;
   };
   
   this.isGameOn = function() {
-      return !BoardService.isPlatformWinning() && !BoardService.didPlayerLose();
+      return BoardService.flips.used < BoardService.flips.permitted &&
+          !playerLost &&
+          !playerWon;
   };
 }]);

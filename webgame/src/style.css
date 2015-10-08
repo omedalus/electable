@@ -358,12 +358,12 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
     width: 260px;
 }
 
-.endbuttons {
+.boardpostgamebuttons {
   margin-top: 20px;
   text-align: center;
 }
 
-.endbuttons button {
+.boardpostgamebuttons button {
   margin-top: 5px;
   width: 200px;
 }

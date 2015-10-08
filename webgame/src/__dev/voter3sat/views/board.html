@@ -10,36 +10,35 @@
         </span>
         votes secured
       </div>
-        
-      <div class="flipflops">
+
+      <div class="flipflops" data-ng-show="BoardService.isGameOn()">
         <div class="flipflop" data-ng-repeat="flip in getFlips() track by $index" data-ng-class="flip ? 'flipped' : 'unflipped'">
             <div class="flipcrossout"></div>
         </div>
       </div>
       
-      <div class="winner" data-ng-show="!!BoardService.voters.length && BoardService.isPlatformWinning() && !BoardService.didPlayerLose()">
-        <div class="winnerburst">
-        </div>
-      </div>
+      <div class="boardpostgamebuttons" data-ng-show="!BoardService.isGameOn()">
+        <!--
+          <label for="numissues" style="vertical-align: top; line-height: 24px;">Difficulty:</label>
+          <input type="range" min="1" max="10" data-ng-model="difficultyLevel" />
+          <br/>
+        -->
       
-      <div class="loser" data-ng-show="!!BoardService.voters.length && BoardService.didPlayerLose()">
-        <div class="loserburst">
-        </div>
-      </div>
-      
-      <div class="endbuttons" data-ng-show="!BoardService.isGameOn()">
-        <label for="numissues" style="vertical-align: top; line-height: 24px;">Difficulty:</label>
-        <input type="range" min="1" max="10" data-ng-model="difficultyLevel" />
-      
-        <button data-ng-click="doGenerate()">
-          Generate another board &gt;&gt;
+        <button data-ng-click="doAdvance()">
+          Next
         </button>
+        <br/>
+
+        <button data-ng-click="doGenerate()">
+          Replay
+        </button>
+        <br/>
         
-        <button data-ng-click="showSolution=true">
+        <button data-ng-click="showSolution=true" data-ng-show="BoardService.didPlayerLose()">
           Show solution
         </button>
+        <br/>
       </div>
-      
     </div>
 
     <div class="voters">
@@ -138,7 +137,23 @@
     
     <div id="helpbutton" class="swivellybutton"
         data-ng-class="HelpService.isHelpShowing() ? 'buttonactive' : ''"
-        data-ng-click="HelpService.showHelp()"></div>
+        data-ng-click="HelpService.showHelp()">
+    </div>
+    
+    <div class="endgamesplash overlayholder"
+        data-ng-show="!BoardService.isGameOn()">
+      <div class="winner overlay"
+          data-ng-show="BoardService.didPlayerWin()">
+        <div class="winnerburst">
+        </div>
+      </div>
+      
+      <div class="loser overlay" data-ng-show="BoardService.didPlayerLose()">
+        <div class="loserburst">
+        </div>
+      </div>
+    </div> <!-- endgamesplash -->
+    
   </div>
 </div>
     
