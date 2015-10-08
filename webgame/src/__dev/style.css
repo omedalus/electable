@@ -43,6 +43,7 @@ body {
   min-height: 600px;
   min-width: 800px;
   padding: 10px;
+  position: relative;
   text-align: left;
   width: 800px;
 }
@@ -396,3 +397,37 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
   margin-top: 5px;
   width: 200px;
 }
+
+#helpbutton {
+  background-image: url('img/help.png');
+  background-size: 32px 32px;
+  border-radius: 16px;
+  display: inline-block;
+  height: 32px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 32px;
+}
+
+@keyframes bouncybutton {
+  0% {transform: rotate(45deg);}
+  50% {transform: rotate(-45deg);}
+  100% {transform: rotate(45deg);}
+}
+
+.bouncybutton {
+  cursor: pointer;
+}
+
+.bouncybutton.buttonactive {
+  cursor: default;
+}
+
+.bouncybutton:hover,
+.bouncybutton.buttonactive {
+  animation: bouncybutton 1s infinite;
+  transform: rotate(20deg);
+}
+
+
