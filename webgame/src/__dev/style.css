@@ -410,9 +410,13 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
 }
 
 .boardpostgamebuttons button {
+  cursor: pointer;
+  height: 120px;
   margin-top: 20px;
   width: 60px;
-  height: 120px;
+}
+.boardpostgamebuttons button img {
+    width: 32px;
 }
 
 #helpbutton {

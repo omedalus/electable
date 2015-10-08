@@ -25,16 +25,19 @@
         -->
       
         <button data-ng-click="doAdvance()" data-ng-show="BoardService.didPlayerWin()">
+          <img src="img/Play1Pressed.png"/><br/>
           Next
         </button>
         <br/>
 
         <button data-ng-click="doGenerate()">
+          <img src="img/recycling-symbol.gif"/><br/>
           Replay
         </button>
         <br/>
         
         <button data-ng-click="showSolution=true" data-ng-show="BoardService.didPlayerLose() && !showSolution">
+          <img src="img/Eye.png"/><br/>
           Show solution
         </button>
         <br/>
