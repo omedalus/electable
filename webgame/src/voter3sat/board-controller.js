@@ -1,6 +1,7 @@
 voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 
     function($document, $scope, BoardService) {
   $scope.BoardService = BoardService;
+  $scope.difficultyLevel = 1;
 
   $($document).keydown(function(e) {
     switch(e.which) {
@@ -51,7 +52,7 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService',
     currentIssueKey = null;
     
     // Start again, with the same # issues.
-    BoardService.start(BoardService.sortedIssues ? BoardService.sortedIssues.length : 3);
+    BoardService.start(2 + parseInt($scope.difficultyLevel));
   };  
   
   $scope.flip = function(issue) {
