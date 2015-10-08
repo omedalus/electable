@@ -49,6 +49,9 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'HelpS
   
   $scope.doGenerate = function() {
     $scope.showSolution = false;
+    $scope.begingamesplashDismissed = false;
+    $scope.endgamesplashDismissed = false;
+    
     currentVoter = null;
     currentIssueKey = null;
     
@@ -57,7 +60,19 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'HelpS
   };  
   
   $scope.flip = function(issue) {
+    var wasGameOnBeforeFlip = BoardService.isGameOn();
+
     BoardService.flipStance(issue);
+    
+    if (wasGameOnBeforeFlip && !BoardService.isGameOn()) {
+      // This flip ended the board. The user will see an end-board overlay.
+      // Set up an auto dismisser for it.
+      setTimeout(function() {
+        $scope.$apply(function() {
+          $scope.endgamesplashDismissed = true;
+        });
+      }, 1000);
+    }
   };
   
   $scope.getFlips = function() {

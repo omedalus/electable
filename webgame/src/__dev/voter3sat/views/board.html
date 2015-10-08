@@ -24,7 +24,7 @@
           <br/>
         -->
       
-        <button data-ng-click="doAdvance()">
+        <button data-ng-click="doAdvance()" data-ng-show="BoardService.didPlayerWin()">
           Next
         </button>
         <br/>
@@ -34,7 +34,7 @@
         </button>
         <br/>
         
-        <button data-ng-click="showSolution=true" data-ng-show="BoardService.didPlayerLose()">
+        <button data-ng-click="showSolution=true" data-ng-show="BoardService.didPlayerLose() && !showSolution">
           Show solution
         </button>
         <br/>
@@ -141,7 +141,9 @@
     </div>
     
     <div class="endgamesplash overlayholder"
-        data-ng-show="!BoardService.isGameOn()">
+        data-ng-show="!BoardService.isGameOn()"
+        data-ng-click="endgamesplashDismissed = true"
+        data-ng-class="endgamesplashDismissed ? 'overlaydismissed' : ''">
       <div class="winner overlay"
           data-ng-show="BoardService.didPlayerWin()">
         <div class="winnerburst">

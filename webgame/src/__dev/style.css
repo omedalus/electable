@@ -458,6 +458,11 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
   text-align: center;
   top: 0;
   width: 100%;
+  transition: opacity 1s, visibility 1s;
+}
+.overlayholder.overlaydismissed {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .overlay {
