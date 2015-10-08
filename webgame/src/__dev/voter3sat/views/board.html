@@ -1,5 +1,16 @@
 <div class="boardctrl">
   <div class="game" data-ng-keyup="keyup($event)">
+  
+    <div class="begingamesplash overlayholder"
+        data-ng-click="begingamesplashDismissed = true"
+        data-ng-class="begingamesplashDismissed ? 'overlaydismissed' : ''">
+      <div class="statelevel overlay">
+        <h1 data-ng-bind="CampaignService.getCurrentBoard().name" />
+        <img src="{{CampaignService.getCurrentBoard().img}}" /><br/>
+        <h2>Debating <span data-ng-bind="CampaignService.getCurrentBoard().numIssues"/> issues</h2>
+      </div>
+    </div> <!-- begingamesplash -->
+
     <div class="progresstracker"
         data-ng-class="BoardService.isGameOn() ? '' : BoardService.didPlayerLose() ? 'boardlost' : 'boardwon'">
       <div class="voterprogress">

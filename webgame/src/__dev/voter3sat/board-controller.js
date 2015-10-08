@@ -1,6 +1,7 @@
-voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'HelpService',
-    function($document, $scope, BoardService, HelpService) {
+voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'CampaignService', 'HelpService',
+    function($document, $scope, BoardService, CampaignService, HelpService) {
   $scope.BoardService = BoardService;
+  $scope.CampaignService = CampaignService;
   $scope.HelpService = HelpService;
   $scope.difficultyLevel = 1;
 
@@ -47,6 +48,11 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'HelpS
     }
   });
   
+  $scope.doAdvance = function() {
+    CampaignService.advanceBoard();
+    $scope.doGenerate();
+  };
+  
   $scope.doGenerate = function() {
     $scope.showSolution = false;
     $scope.begingamesplashDismissed = false;
@@ -56,8 +62,15 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'HelpS
     currentIssueKey = null;
     
     // Start again, with the same # issues.
-    BoardService.start(2 + parseInt($scope.difficultyLevel));
-  };  
+    BoardService.start(CampaignService.getCurrentBoard().numIssues);
+    
+    // Clear the state splasher.
+    setTimeout(function() {
+      $scope.$apply(function() {
+        $scope.begingamesplashDismissed = true;
+      });
+    }, 3000);
+  };
   
   $scope.flip = function(issue) {
     var wasGameOnBeforeFlip = BoardService.isGameOn();

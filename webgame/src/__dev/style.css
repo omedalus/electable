@@ -22,6 +22,10 @@ body {
   padding: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 .app {
   margin: 0;
   padding: 0;
@@ -378,6 +382,17 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
   background-color: #aaa;
 }
 
+.statelevel.overlay {
+  margin: auto;
+  text-align: center;
+  background-color: rgba(255,255,255,.2);
+  box-shadow: 0 0 40px rgba(255,255,255,.4);
+}
+
+.statelevel img {
+  height: 260px;
+}
+
 .winner {
   background-color: rgba(0,120,0,.2);
   box-shadow: 0 0 40px rgba(0,120,0,.4);
@@ -454,6 +469,7 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
 
 .overlayholder {
   background-color: rgba(100,100,100,.6);
+  border-radius: 5px;
   box-sizing: border-box;
   height: 100%;
   left: 0;
@@ -463,6 +479,7 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
   top: 0;
   width: 100%;
   transition: opacity 1s, visibility 1s;
+  z-index: 1000;
 }
 .overlayholder.overlaydismissed {
   opacity: 0;
@@ -494,4 +511,19 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
 
 .bottombuttonholder button {
   padding: 10px 40px;
+}
+
+
+.homectrl  {
+  text-align: center;
+}
+
+.homectrl h1 {
+  color: #fff;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.homectrl button {
+  margin-top: 40px;
+  padding: 20px 40px;
 }
