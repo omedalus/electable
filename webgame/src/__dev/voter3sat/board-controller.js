@@ -1,6 +1,7 @@
-voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 
-    function($document, $scope, BoardService) {
+voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'HelpService',
+    function($document, $scope, BoardService, HelpService) {
   $scope.BoardService = BoardService;
+  $scope.HelpService = HelpService;
   $scope.difficultyLevel = 1;
 
   $($document).keydown(function(e) {

@@ -1,9 +1,7 @@
 <div class="boardctrl">
   <div class="game" data-ng-keyup="keyup($event)">
-    <div class="platform">
-      <div class="voterlead">
-        The Voters 
-      </div>
+    <div class="progresstracker"
+        data-ng-class="BoardService.isGameOn() ? '' : BoardService.didPlayerLose() ? 'boardlost' : 'boardwon'">
       <div class="voterprogress">
         <span class="voterprogressstats">
           <span class="votessecured" data-ng-bind="countVotersSecured()"></span>
@@ -13,18 +11,6 @@
         votes secured
       </div>
         
-      <div class="voterexplain instructiontext">
-        <ul>
-          <li>You must convince <em>every</em> voter to vote for you.</li>
-          <li>Each voter has a strong opinion about <em>three</em> issues.</li>
-          <li>A voter will vote for you if they agree with you on at least <em>one</em>
-              of their three personal issues.</li>
-          <li>Flip your stances on an issue to switch which voters agree/disagree with you on it.</li>
-          <li>A winning combination of stances will match at least <em>one</em> personal issue of <em>every</em> voter.</li>
-          <li>You can only make {{getFlips().length}} flipflops.</li>
-        </ul>
-      </div>
-      
       <div class="flipflops">
         <div class="flipflop" data-ng-repeat="flip in getFlips() track by $index" data-ng-class="flip ? 'flipped' : 'unflipped'">
             <div class="flipcrossout"></div>
@@ -150,7 +136,9 @@
       </div>
     </div>
     
-    <div id="helpbutton" class="bouncybutton"></div>
+    <div id="helpbutton" class="swivellybutton"
+        data-ng-class="HelpService.isHelpShowing() ? 'buttonactive' : ''"
+        data-ng-click="HelpService.showHelp()"></div>
   </div>
 </div>
     

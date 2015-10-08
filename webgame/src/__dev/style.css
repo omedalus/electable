@@ -55,27 +55,31 @@ body {
   width: 800px;
 }
 
-.platform {
+.progresstracker {
   background-color: #59a4d3;
   border: 1px solid #008;
   border-radius: 10px;
   color: white;
   display: inline-block;
+  height: 520px;
   margin-right: 20px;
   padding: 10px;
   vertical-align: top;
   white-space: normal;
-  width: 260px;
+  width: 60px;
 }
+
+.progresstracker.boardlost {
+  background-color: #f44;
+}
+.progresstracker.boardwon {
+  background-color: #4f4;
+}
+
 
 .platformlead {
   font-size: 20px;
   font-weight: bold;
-}
-
-.instructiontext {
-  font-size: 12px;
-  white-space: normal;
 }
 
 ul {
@@ -101,7 +105,7 @@ ul {
   height: 120px;
   margin-left: 32px;
   padding: 20px;
-  width: 448px;
+  width: 608px;
 }
 
 .issuelist {
@@ -141,12 +145,13 @@ ul {
 }
 
 .issueitem:hover .issueblurb {
-    opacity: 1;
+  opacity: 1;
 }
 
 .platformissue {
-  padding: 10px 0;
   cursor: pointer;
+  padding: 10px 0;
+  text-align: center;
 }
 
 .currentissue {
@@ -231,20 +236,20 @@ ul {
 
 
 .flipflop {
-    background-image: url('http://images.lacrosseunlimited.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/R/a/Rainbow_Sandals_Premier_Leathers_tan_sierra_301ALTS0_srbr_42_2.png');
-    background-size: 64px 64px;
-    display: inline-block;
-    height: 64px;
-    white-space: normal;
-    width: 64px;
+  background-image: url('http://images.lacrosseunlimited.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/R/a/Rainbow_Sandals_Premier_Leathers_tan_sierra_301ALTS0_srbr_42_2.png');
+  background-size: 64px 64px;
+  display: inline-block;
+  height: 64px;
+  white-space: normal;
+  width: 64px;
 }
 
 .flipcrossout {
-    background-image: url('http://www.aspals.com/redcross.gif');
-    background-size: 64px 64px;
-    display: inline-block;
-    height: 64px;
-    width: 64px;
+  background-image: url('http://www.aspals.com/redcross.gif');
+  background-size: 64px 64px;
+  display: inline-block;
+  height: 64px;
+  width: 64px;
 }
 
 .flipflop.unflipped .flipcrossout {
@@ -254,26 +259,25 @@ ul {
 .voters {
   display: inline-block;
   position: relative;
-  width: 480px;
+  width: 640px;
 }
 
 .voterlead {
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .voterprogress {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .votessecured {
-    color: white;
+  color: white;
 }
 
 .votestotal {
-    color: #666;
+  color: #666;
 }
-
 
 
 .votertable {
@@ -410,24 +414,61 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
   width: 32px;
 }
 
-@keyframes bouncybutton {
+@keyframes swivellybutton {
   0% {transform: rotate(45deg);}
   50% {transform: rotate(-45deg);}
   100% {transform: rotate(45deg);}
 }
 
-.bouncybutton {
+.swivellybutton {
   cursor: pointer;
 }
 
-.bouncybutton.buttonactive {
+.swivellybutton.buttonactive {
   cursor: default;
 }
 
-.bouncybutton:hover,
-.bouncybutton.buttonactive {
-  animation: bouncybutton 1s infinite;
+.swivellybutton:hover,
+.swivellybutton.buttonactive {
+  animation: swivellybutton 1s infinite;
   transform: rotate(20deg);
 }
 
 
+.overlayholder {
+  box-sizing: border-box;
+  height: 100%;
+  left: 0;
+  padding-top: 100px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+}
+
+.overlay {
+  display: inline-block;
+  margin: auto;
+  text-align: left;
+  width: 600px;
+}
+
+.helpctrl {
+  background-color: rgba(240,200,0,.9);
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #c80;
+  font-size: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px #000;
+}
+
+.bottombuttonholder {
+  margin-top: 40px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bottombuttonholder button {
+  padding: 10px 40px;
+}
