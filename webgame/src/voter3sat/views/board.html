@@ -111,13 +111,16 @@
             <tr class="voterrow" data-ng-repeat="voter in BoardService.voters"
                 data-ng-class="getVoterRowClasses(voter)"
                 data-ng-click="setCurrentVoter(voter)">
-              <td class="voterpic gridicon" data-ng-style="voterImageStyle(voter)"></td>
+              <td class="voterpicholder gridicon" data-ng-style="voterImageStyle(voter)">
+                <div class="voterpic voterdisagrees" />
+                <div class="voterpic voteragrees" />
+              </td>
               
               <td class="voterissue" data-ng-repeat="issue in BoardService.sortedIssues"
                   data-ng-class="getVoterIssueOpinionClasses(voter, issue.key)">
                 <div class="voterissuebox" data-ng-show="voterCaresAboutIssue(voter, issue.key)">
-                  <div class="voterissueboxmark voterissueboxagrees" />
                   <div class="voterissueboxmark voterissueboxdisagrees" />                  
+                  <div class="voterissueboxmark voterissueboxagrees" />
                 </div>
               </td>
             </tr>

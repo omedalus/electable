@@ -303,6 +303,24 @@ ul {
 
 tr.voterrow {
   cursor: pointer;
+
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#dcffdc+0,c8f0c8+20,c8f0c8+86,78b478+100 */
+  background: #dcffdc; /* Old browsers */
+  background: -moz-linear-gradient(top,  #dcffdc 0%, #c8f0c8 20%, #c8f0c8 86%, #78b478 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #dcffdc 0%,#c8f0c8 20%,#c8f0c8 86%,#78b478 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #dcffdc 0%,#c8f0c8 20%,#c8f0c8 86%,#78b478 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcffdc', endColorstr='#78b478',GradientType=0 ); /* IE6-9 */
+
+  transition: background 1s;
+}
+
+tr.voterrow.voterisnotvotingforyou {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffdcdc+0,f0c8c8+20,f0c8c8+86,b47878+100 */
+  background: #ffdcdc; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ffdcdc 0%, #f0c8c8 20%, #f0c8c8 86%, #b47878 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #ffdcdc 0%,#f0c8c8 20%,#f0c8c8 86%,#b47878 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #ffdcdc 0%,#f0c8c8 20%,#f0c8c8 86%,#b47878 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffdcdc', endColorstr='#b47878',GradientType=0 ); /* IE6-9 */
 }
 
 tr.voterrow  td {
@@ -318,14 +336,32 @@ tr.voterrow:first-child  td {
 }
 
 
-.voterpic {
-  background-image: url('img/user_blue_32.png');
+.voterpicholder {
   height: 32px;
+  position: relative;
   width: 32px;
 }
-
-tr.voterrow.voterisnotvotingforyou  .voterpic {
+.voterpic {
+  background-image: url('img/user_blue_32.png');
+  background-size: 32px 32px;
+  height: 32px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 32px;
+  transition: opacity .5s;
+}
+.voterpic.voterdisagrees {
   background-image: url('img/user_red.png');
+}
+.voterpic.voterdisagrees {
+  background-image: url('img/user_red.png');
+}
+
+.voterisnotvotingforyou .voterdisagrees,
+.voterisvotingforyou .voteragrees {
+  opacity: 1;
 }
 
 
@@ -366,11 +402,6 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
 .voterdisagreesonissue .voterissueboxdisagrees {
   transform: scale(1);
   transition: transform .5s;
-}
-
-
-@keyframes spin-in {
-  to {transform: rotate(360deg);}
 }
 
 .statelevel.overlay {
