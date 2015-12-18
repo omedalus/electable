@@ -144,10 +144,13 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'Campa
 
   $scope.getVoterRowClasses = function(voter) {
     var isVoterVotingForYou = BoardService.isVoterVotingForYou(voter);
+    var isVoterAtRisk = $scope.willWeLoseVoterIfWeFlipOnCurrentIssue(voter);
+    
     return {
       voterisvotingforyou: isVoterVotingForYou,
       voterisnotvotingforyou: !isVoterVotingForYou,
-      rowexpanded: (currentVoter === voter)
+      rowexpanded: (currentVoter === voter),
+      voterisatrisk: isVoterAtRisk
     };
   };
   
@@ -227,7 +230,8 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'Campa
       currentissue: isIssueCurrent
     }
   };
-  
+
+
   $scope.getVoterAgreementString = function(voter) {
     if (!voter) {
       return null;
@@ -255,6 +259,33 @@ voter3sat.controller('BoardCtrl', ['$document', '$scope', 'BoardService', 'Campa
       return null;
     };
   };
+
+  
+  $scope.willWeLoseVoterIfWeFlipOnCurrentIssue = function(voter) {
+    if (!voter) {
+      return null;
+    }
+    
+    var issue = $scope.getCurrentIssue();
+    if (issue == null) {
+      return;
+    }
+
+    var numIssuesOnWhichVoterAgrees = 0;
+    var doesVoterAgreeOnCurrentIssue = false;
+    for (var i = 0; i < voter.sortedIssueKeys.length; i++) {
+      var issuekey = voter.sortedIssueKeys[i];
+      if (voter.opinions[issuekey] === BoardService.platform[issuekey]) {
+        numIssuesOnWhichVoterAgrees++;
+        
+        if (issuekey === issue.key) {
+          doesVoterAgreeOnCurrentIssue = true;
+        }
+      }
+    }
+    
+    return (doesVoterAgreeOnCurrentIssue && numIssuesOnWhichVoterAgrees === 1);
+  }
   
   $scope.doGenerate();
 }]);

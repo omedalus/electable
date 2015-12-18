@@ -306,9 +306,9 @@ tr.voterrow {
 
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#dcffdc+0,c8f0c8+20,c8f0c8+86,78b478+100 */
   background: #dcffdc; /* Old browsers */
-  background: -moz-linear-gradient(top,  #dcffdc 0%, #c8f0c8 20%, #c8f0c8 86%, #78b478 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  #dcffdc 0%,#c8f0c8 20%,#c8f0c8 86%,#78b478 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  #dcffdc 0%,#c8f0c8 20%,#c8f0c8 86%,#78b478 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: -moz-linear-gradient(top,  #dcffdc 0%, #c8f0c8 20%, #c8f0c8 80%, #78b478 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #dcffdc 0%,#c8f0c8 20%,#c8f0c8 80%,#78b478 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #dcffdc 0%,#c8f0c8 20%,#c8f0c8 80%,#78b478 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcffdc', endColorstr='#78b478',GradientType=0 ); /* IE6-9 */
 
   transition: background 1s;
@@ -317,10 +317,19 @@ tr.voterrow {
 tr.voterrow.voterisnotvotingforyou {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffdcdc+0,f0c8c8+20,f0c8c8+86,b47878+100 */
   background: #ffdcdc; /* Old browsers */
-  background: -moz-linear-gradient(top,  #ffdcdc 0%, #f0c8c8 20%, #f0c8c8 86%, #b47878 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  #ffdcdc 0%,#f0c8c8 20%,#f0c8c8 86%,#b47878 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  #ffdcdc 0%,#f0c8c8 20%,#f0c8c8 86%,#b47878 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: -moz-linear-gradient(top,  #ffdcdc 0%, #f0c8c8 20%, #f0c8c8 80%, #b47878 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #ffdcdc 0%,#f0c8c8 20%,#f0c8c8 80%,#b47878 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #ffdcdc 0%,#f0c8c8 20%,#f0c8c8 80%,#b47878 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffdcdc', endColorstr='#b47878',GradientType=0 ); /* IE6-9 */
+}
+
+tr.voterrow.voterisatrisk {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#dcffdc+0,c8f0c8+20,c8f0c8+86,78b478+100 */
+  background: #dcffdc; /* Old browsers */
+  background: -moz-linear-gradient(top,  #dcffdc 0%, #c8f0c8 20%, #f0c8c8 50%, #c8f0c8 80%, #78b478 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #dcffdc 0%,#c8f0c8 20%,#f0c8c8 50%,#c8f0c8 80%,#78b478 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #dcffdc 0%,#c8f0c8 20%,#f0c8c8 50%,#c8f0c8 80%,#78b478 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcffdc', endColorstr='#78b478',GradientType=0 ); /* IE6-9 */
 }
 
 tr.voterrow  td {
@@ -342,7 +351,6 @@ tr.voterrow:first-child  td {
   width: 32px;
 }
 .voterpic {
-  background-image: url('img/user_blue_32.png');
   background-size: 32px 32px;
   height: 32px;
   left: 0;
@@ -352,8 +360,8 @@ tr.voterrow:first-child  td {
   width: 32px;
   transition: opacity .5s;
 }
-.voterpic.voterdisagrees {
-  background-image: url('img/user_red.png');
+.voterpic.voteragrees {
+  background-image: url('img/user_blue_32.png');
 }
 .voterpic.voterdisagrees {
   background-image: url('img/user_red.png');
@@ -362,6 +370,27 @@ tr.voterrow:first-child  td {
 .voterisnotvotingforyou .voterdisagrees,
 .voterisvotingforyou .voteragrees {
   opacity: 1;
+}
+
+@keyframes opaquethrob {
+  0%  { opacity: .1; }
+  50%  { opacity: .5; }
+  99%  { opacity: .1; }
+}
+
+@keyframes opaquethrob-inv {
+  0%  { opacity: .9; }
+  50%  { opacity: .5; }
+  99%  { opacity: .9; }
+}
+
+.voterisatrisk .voterdisagrees {
+  animation: opaquethrob 1s;
+  animation-iteration-count: infinite;
+}
+.voterisatrisk .voteragrees {
+  animation: opaquethrob-inv 1s;
+  animation-iteration-count: infinite;
 }
 
 
