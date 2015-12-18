@@ -33,11 +33,11 @@ button {
 }
 
 .viewcontainer {
-  background-color: rgba(160,200,255,.95);
+  background-color: rgba(255,255,128,.95);
   box-sizing: border-box;
-  border: 2px solid #00f;
+  border: 4px solid #884;
   border-radius: 10px;
-  box-shadow: 0 0 40px 20px #000;  
+  box-shadow: 0px 5px 30px 10px #000, 0px -3px 5px 5px #cc0 inset; 
   display: inline-block;
   height: 600px;
   margin: auto;
@@ -158,8 +158,20 @@ ul {
   text-align: center;
 }
 
-.currentissue {
+@keyframes anim-throb {
+  0%  { transform: scale(1); }
+  50%  { transform: scale(1.6); }
+  99%  { transform: scale(1); }
+}
+
+.platformissue.currentissue {
   background: #cc8;
+}
+
+.currentissue .voterissuebox {
+  animation-name: anim-throb;
+  animation-duration: .5s;
+  animation-iteration-count: infinite;
 }
 
 .issuelabelpro {
@@ -305,27 +317,6 @@ tr.voterrow:first-child  td {
   border-top: 1px solid #448;
 }
 
-tr.voterrow:hover {
-  background: #acf;
-}
-tr.voterrow:hover td{
-  background-color: transparent;
-}
-
-
-tr.voterrow.rowexpanded {
-  background: #acf;
-  height: 164px;
-}
-tr.voterrow.rowexpanded td{
-  background-color: transparent;
-}
-tr.voterrow.rowexpanded:hover {
-  background: #def;
-  height: 164px;
-}
-
-
 
 .voterpic {
   background-image: url('img/user_blue_32.png');
@@ -343,43 +334,43 @@ tr.voterrow.voterisnotvotingforyou  .voterpic {
 }
 
 .voterissuebox {
-  border: 1px solid #448;
-  border-radius: 10px;
   display: inline-block;
   height: 20px;
+  position: relative;
   width: 20px;
 }
 
-.voterissue.voteragreesonissue .voterissuebox {
-  background-color: #fff;
-}
-.voterissue.voterdisagreesonissue .voterissuebox {
-  background-color: #444;
-}
-
-.voterinterview {
-  background-color: #fff;
-  border: 2px solid #228;
-  border-radius: 10px;
-  display: none;
-  margin-left: 50px;
-  margin-right: 10px;
-  margin-top: 32px;
-  padding: 10px;
+.voterissuebox .voterissueboxmark {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  display: inline-block;
+  height: 20px;
+  left: 0px;
   position: absolute;
+  width: 20px;
+  transform: scale(0);
+  transition: transform 1s;
 }
 
-.voterinterview ul {
-  font-weight: bold;
-  margin-bottom: 10px;
+.voterissuebox .voterissueboxmark.voterissueboxagrees {
+  background-image: url('img/checkmark.png');
+  background-size: 20px 15px;
+}
+.voterissuebox .voterissueboxmark.voterissueboxdisagrees {
+  background-image: url('img/red-x-mark.png');
+  background-size: 10px 10px;
 }
 
-.voteragreementlist {
-  font-weight: bold;
+.voteragreesonissue .voterissueboxagrees,
+.voterdisagreesonissue .voterissueboxdisagrees {
+  transform: scale(1);
+  transition: transform .5s;
 }
 
-.voterinterviewoppose {
-  background-color: #aaa;
+
+@keyframes spin-in {
+  to {transform: rotate(360deg);}
 }
 
 .statelevel.overlay {

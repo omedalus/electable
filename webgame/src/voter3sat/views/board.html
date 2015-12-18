@@ -116,6 +116,8 @@
               <td class="voterissue" data-ng-repeat="issue in BoardService.sortedIssues"
                   data-ng-class="getVoterIssueOpinionClasses(voter, issue.key)">
                 <div class="voterissuebox" data-ng-show="voterCaresAboutIssue(voter, issue.key)">
+                  <div class="voterissueboxmark voterissueboxagrees" />
+                  <div class="voterissueboxmark voterissueboxdisagrees" />                  
                 </div>
               </td>
             </tr>
@@ -123,30 +125,6 @@
         </table>
       </div>
       
-      <div class="voterinterview"
-          data-ng-class="BoardService.isVoterVotingForYou(getCurrentVoter()) ? 'voterinterviewsupport' : 'voterinterviewoppose'">
-        I am
-        <ul>
-          <li data-ng-repeat="issuekey in getCurrentVoter().sortedIssueKeys"
-              data-ng-class="getCurrentVoter().opinions[issuekey] ? 'issuepro' : 'issuecon'">
-            <span data-ng-show="getCurrentVoter().opinions[issuekey]">
-              FOR
-            </span>
-            <span data-ng-show="!getCurrentVoter().opinions[issuekey]">
-              AGAINST
-            </span>
-            <span data-ng-bind="BoardService.issues[issuekey].issuetext"></span>
-          </li>
-        </ul>
-        <div class="voteragreement" data-ng-show="BoardService.isVoterVotingForYou(getCurrentVoter())">
-          I like your views on
-          <span class="voteragreementlist" data-ng-bind="getVoterAgreementString(getCurrentVoter())"></span>!
-          You&rsquo;ve got my vote!
-        </div>
-        <div class="voterdisagreement" data-ng-hide="BoardService.isVoterVotingForYou(getCurrentVoter())">
-          You share none of my views. I will not vote for you.
-        </div>
-      </div>
     </div>
     
     <div id="helpbutton" class="swivellybutton"
